@@ -14,7 +14,6 @@ struct LatestComicRequest: APIRequest {
 }
 
 struct ComicByNumberRequest: APIRequest {
-    
     typealias Response = Comic
     
     var comicNumber: String

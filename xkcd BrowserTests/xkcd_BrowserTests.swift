@@ -10,12 +10,36 @@ import XCTest
 
 class ComicNetworkingTests: XCTestCase {
     
-    func testFetchComics() throws {
+    func test_fetchLatestComic() throws {
         let expectation = self.expectation(description: "Wait for data")
         
         //Fetch the data here
+        LatestComicRequest().sendAPIRequest { response in
+            switch response {
+            case .success(_):
+                expectation.fulfill()
+            case .failure(_):
+                break
+            }
+            
+        }
         
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 2)
+    }
+    
+    func test_fetchComicByNumber() throws {
+        let expectation = self.expectation(description: "Wait for data")
+        
+        ComicByNumberRequest(comicNumber: "2367").sendAPIRequest { result in
+            switch result {
+            case .success(_):
+                expectation.fulfill()
+            case .failure(_):
+                break
+            }
+        }
+        
+        waitForExpectations(timeout: 5)
     }
 
 }
