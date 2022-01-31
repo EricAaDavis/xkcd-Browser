@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ComicBrowserViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@ import UIKit
 struct LatestComicRequest: APIRequest {
     typealias Response = Comic
     
-    var path: String? = "/info.0.json"
+    var path: String = "/info.0.json"
 }
 
 struct ComicByNumberRequest: APIRequest {
@@ -18,7 +18,7 @@ struct ComicByNumberRequest: APIRequest {
     
     var comicNumber: String
     
-    var path: String? {
+    var path: String {
         "/\(comicNumber)/info.0.json"
     }
 }
@@ -26,7 +26,5 @@ struct ComicByNumberRequest: APIRequest {
 struct ComicImageRequest: APIRequest {
     typealias Response = UIImage
     
-    var imageURL: URL?
-    
-    var path: String? = nil
+    var imageURL: URL?    
 }

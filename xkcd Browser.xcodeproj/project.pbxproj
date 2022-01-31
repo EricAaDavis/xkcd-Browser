@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		20DA993027A8083600071988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA992F27A8083600071988 /* AppDelegate.swift */; };
 		20DA993227A8083600071988 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA993127A8083600071988 /* SceneDelegate.swift */; };
-		20DA993427A8083600071988 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA993327A8083600071988 /* ViewController.swift */; };
+		20DA993427A8083600071988 /* ComicBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA993327A8083600071988 /* ComicBrowserViewController.swift */; };
 		20DA993727A8083600071988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993527A8083600071988 /* Main.storyboard */; };
 		20DA993927A8083D00071988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993827A8083D00071988 /* Assets.xcassets */; };
 		20DA993C27A8083D00071988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993A27A8083D00071988 /* LaunchScreen.storyboard */; };
@@ -33,7 +33,7 @@
 		20DA992C27A8083600071988 /* xkcd Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xkcd Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20DA992F27A8083600071988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20DA993127A8083600071988 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		20DA993327A8083600071988 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		20DA993327A8083600071988 /* ComicBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBrowserViewController.swift; sourceTree = "<group>"; };
 		20DA993627A8083600071988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20DA993827A8083D00071988 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20DA993B27A8083D00071988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		20DA996127A8098F00071988 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				20DA993327A8083600071988 /* ViewController.swift */,
+				20DA993327A8083600071988 /* ComicBrowserViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20DA993427A8083600071988 /* ViewController.swift in Sources */,
+				20DA993427A8083600071988 /* ComicBrowserViewController.swift in Sources */,
 				20DA993027A8083600071988 /* AppDelegate.swift in Sources */,
 				20DA996727A812FD00071988 /* Comic.swift in Sources */,
 				20DA996527A80DED00071988 /* APIRequest.swift in Sources */,

@@ -24,7 +24,7 @@ class ComicNetworkingTests: XCTestCase {
             
         }
         
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 1)
     }
     
     func test_fetchComicByNumber() throws {
@@ -39,7 +39,7 @@ class ComicNetworkingTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: 1)
     }
     
     func test_ComicImageRequest() {
@@ -51,7 +51,7 @@ class ComicNetworkingTests: XCTestCase {
                 let imageURL = comic.img
                 ComicImageRequest(imageURL: imageURL).send { response in
                     switch response {
-                    case .success(let image):
+                    case .success(_):
                         expectation.fulfill()
                     case .failure(_):
                         break
@@ -62,7 +62,7 @@ class ComicNetworkingTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 4)
+        waitForExpectations(timeout: 1)
     }
 
 }

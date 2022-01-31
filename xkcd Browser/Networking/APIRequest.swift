@@ -11,7 +11,7 @@ protocol APIRequest {
     //Response represents the type of object returned by the request
     associatedtype Response
     
-    var path: String? { get }
+    var path: String { get }
     var queryItems: [URLQueryItem]? { get }
     var request: URLRequest { get }
     var imageURL: URL? { get }
@@ -24,6 +24,7 @@ extension APIRequest {
 
 //These will usually be nil, so we set a default value
 extension APIRequest {
+    var path: String { "/info.0.json" }
     var queryItems: [URLQueryItem]? { nil }
     var imageURL: URL? { nil }
 }
@@ -41,7 +42,7 @@ extension APIRequest {
             
             components.scheme = "https"
             components.host = host
-            components.path = path!
+            components.path = path
             components.queryItems = queryItems
             
             let request = URLRequest(url: components.url!)
