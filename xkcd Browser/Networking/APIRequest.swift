@@ -21,6 +21,10 @@ extension APIRequest {
     var host: String { "xkcd.com" }
 }
 
+extension APIRequest {
+    var queryItems: [URLQueryItem]? { nil }
+}
+
 //Constructed api request
 extension APIRequest {
     var request: URLRequest {
