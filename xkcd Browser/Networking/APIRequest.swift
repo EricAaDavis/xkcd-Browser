@@ -54,21 +54,37 @@ extension APIRequest {
 //Limiting the user of the method inside to only those types whose associated Response typed are decodable
 extension APIRequest where Response: Decodable {
     
-    func sendAPIRequest(completion: @escaping (Result<Response, Error>) -> Void) {
-        print(request.url!)
+    func send(completion: @escaping (Result<Response, Error>) -> Void) {
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             do {
                 if let data = data {
                     let decoded = try JSONDecoder().decode(Response.self, from: data)
-                    print("Sucsesfully decoded")
                     completion(.success(decoded))
                 } else if let error = error {
-                    print(error.localizedDescription)
                     completion(.failure(error))
                 }
             }
             catch {
                 print("Request Failed")
+            }
+        }.resume()
+    }
+}
+
+enum ImageRequestError: Error {
+    case coundNotInitializeFromData
+}
+
+extension APIRequest where Response == UIImage {
+    func send(completion: @escaping (Result<Self.Response, Error>) -> Void) {
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let data = data,
+               let image = UIImage(data: data) {
+                completion(.success(image))
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(ImageRequestError.coundNotInitializeFromData))
             }
         }.resume()
     }
