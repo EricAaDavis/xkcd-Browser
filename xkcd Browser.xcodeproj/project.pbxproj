@@ -15,6 +15,7 @@
 		20DA993C27A8083D00071988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993A27A8083D00071988 /* LaunchScreen.storyboard */; };
 		20DA994727A8083E00071988 /* xkcd_BrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA994627A8083E00071988 /* xkcd_BrowserTests.swift */; };
 		20DA996527A80DED00071988 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA996427A80DED00071988 /* APIRequest.swift */; };
+		20DA996727A812FD00071988 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA996627A812FD00071988 /* Comic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		20DA994627A8083E00071988 /* xkcd_BrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xkcd_BrowserTests.swift; sourceTree = "<group>"; };
 		20DA994C27A8083E00071988 /* xkcd BrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xkcd BrowserUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20DA996427A80DED00071988 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		20DA996627A812FD00071988 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +102,8 @@
 				20DA993127A8083600071988 /* SceneDelegate.swift */,
 				20DA996227A80DC500071988 /* Networking */,
 				20DA996127A8098F00071988 /* Controller */,
-				20DA996027A8098700071988 /* View */,
 				20DA995F27A8098100071988 /* Model */,
+				20DA996027A8098700071988 /* View */,
 				20DA993827A8083D00071988 /* Assets.xcassets */,
 				20DA993D27A8083D00071988 /* Info.plist */,
 			);
@@ -119,6 +121,7 @@
 		20DA995F27A8098100071988 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20DA996627A812FD00071988 /* Comic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			files = (
 				20DA993427A8083600071988 /* ViewController.swift in Sources */,
 				20DA993027A8083600071988 /* AppDelegate.swift in Sources */,
+				20DA996727A812FD00071988 /* Comic.swift in Sources */,
 				20DA996527A80DED00071988 /* APIRequest.swift in Sources */,
 				20DA993227A8083600071988 /* SceneDelegate.swift in Sources */,
 			);
