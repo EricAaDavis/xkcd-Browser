@@ -11,33 +11,43 @@ protocol APIRequest {
     //Response represents the type of object returned by the request
     associatedtype Response
     
-    var path: String { get }
+    var path: String? { get }
     var queryItems: [URLQueryItem]? { get }
     var request: URLRequest { get }
+    var imageURL: URL? { get }
 }
 
-//This value never changes, so we set a default value
+//This value usually doesn't changes, so we set a default value
 extension APIRequest {
     var host: String { "xkcd.com" }
 }
 
+//These will usually be nil, so we set a default value
 extension APIRequest {
     var queryItems: [URLQueryItem]? { nil }
+    var imageURL: URL? { nil }
 }
 
 //Constructed api request
 extension APIRequest {
     var request: URLRequest {
-        var components = URLComponents()
-        
-        components.scheme = "https"
-        components.host = host
-        components.path = path
-        components.queryItems = queryItems
-        
-        let request = URLRequest(url: components.url!)
-        
-        return request
+        //If we have an imageURL, send a request with the imageURL for the respectable comic
+        if let imageURL = imageURL {
+            let imageRequest = URLRequest(url: imageURL)
+            return imageRequest
+        } else {
+            //Otherwise, if we do not have an imageURL, construct a url for the requested comic
+            var components = URLComponents()
+            
+            components.scheme = "https"
+            components.host = host
+            components.path = path!
+            components.queryItems = queryItems
+            
+            let request = URLRequest(url: components.url!)
+            
+            return request
+        }
     }
 }
 

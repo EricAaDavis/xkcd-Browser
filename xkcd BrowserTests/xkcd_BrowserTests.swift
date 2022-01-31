@@ -41,5 +41,9 @@ class ComicNetworkingTests: XCTestCase {
         
         waitForExpectations(timeout: 5)
     }
+    
+    func test_fetchImageForComic() {
+        
+    }
 
 }
