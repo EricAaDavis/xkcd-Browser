@@ -22,14 +22,17 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
-        viewModel.getPreviousComicsForNumber(from: 100, to: 120)
+
+        //First we get the latest comic
+        viewModel.getLatestComicWithPreviousTwenty()
+        
     }
     
     let viewModel = ComicBrowserViewModel()
     
+    
     func checkData() {
-        print(viewModel.items())
+        viewModel.items()
     }
 }
 
