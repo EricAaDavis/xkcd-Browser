@@ -154,59 +154,27 @@
         <!--Comic Browser-->
         <scene sceneID="oNI-SE-VDj">
             <objects>
-                <collectionViewController id="2wP-fU-7Qd" sceneMemberID="viewController">
+                <collectionViewController id="2wP-fU-7Qd" customClass="ComicBrowserCollectionViewController" customModule="xkcd_Browser" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GBJ-bQ-UfU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nr2-h6-QJ0">
-                            <size key="itemSize" width="414" height="184"/>
+                            <size key="itemSize" width="414" height="275"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LatestComicCell" id="tpB-ne-V2i">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XQC-Yi-gr7">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="184"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIV-dl-Xfd">
-                                            <rect key="frame" x="8" y="8" width="398" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="d48-zn-sBj"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComicImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="1Gs-qy-nw5">
-                                            <rect key="frame" x="8" y="37" width="398" height="139"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="rIV-dl-Xfd" firstAttribute="leading" secondItem="XQC-Yi-gr7" secondAttribute="leading" constant="8" id="E1N-wk-woG"/>
-                                        <constraint firstAttribute="trailing" secondItem="1Gs-qy-nw5" secondAttribute="trailing" constant="8" id="ERu-vW-DBh"/>
-                                        <constraint firstAttribute="trailing" secondItem="rIV-dl-Xfd" secondAttribute="trailing" constant="8" id="GLd-0s-dVK"/>
-                                        <constraint firstItem="rIV-dl-Xfd" firstAttribute="top" secondItem="XQC-Yi-gr7" secondAttribute="top" constant="8" id="IcV-X4-PMy"/>
-                                        <constraint firstItem="1Gs-qy-nw5" firstAttribute="top" secondItem="rIV-dl-Xfd" secondAttribute="bottom" constant="8" id="QLV-pN-0lN"/>
-                                        <constraint firstItem="1Gs-qy-nw5" firstAttribute="leading" secondItem="XQC-Yi-gr7" secondAttribute="leading" constant="8" id="jGw-xd-tOF"/>
-                                        <constraint firstAttribute="bottom" secondItem="1Gs-qy-nw5" secondAttribute="bottom" constant="8" id="pRo-IK-jaU"/>
-                                    </constraints>
-                                </collectionViewCellContentView>
-                                <size key="customSize" width="414" height="184"/>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ComicCell" id="YvX-3M-bC6">
-                                <rect key="frame" x="106" y="194" width="202" height="180"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ComicCell" id="YvX-3M-bC6" customClass="ComicCollectionViewCell" customModule="xkcd_Browser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8ch-XL-CDo">
-                                    <rect key="frame" x="0.0" y="0.0" width="202" height="180"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsa-tP-wvK">
-                                            <rect key="frame" x="8" y="8" width="194" height="21"/>
+                                            <rect key="frame" x="8" y="8" width="406" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="jic-w2-BHz"/>
                                             </constraints>
@@ -215,10 +183,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComicImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="nRu-aA-Cer">
-                                            <rect key="frame" x="8" y="37" width="186" height="106"/>
+                                            <rect key="frame" x="8" y="37" width="398" height="201"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emR-Vb-zuG">
-                                            <rect key="frame" x="8" y="151" width="186" height="21"/>
+                                            <rect key="frame" x="8" y="246" width="398" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -238,7 +206,12 @@
                                         <constraint firstAttribute="bottom" secondItem="emR-Vb-zuG" secondAttribute="bottom" constant="8" id="qy5-ka-jtu"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="202" height="180"/>
+                                <size key="customSize" width="414" height="275"/>
+                                <connections>
+                                    <outlet property="comicImageView" destination="nRu-aA-Cer" id="1az-Fx-Nhg"/>
+                                    <outlet property="comicNumberLabel" destination="emR-Vb-zuG" id="KfT-fl-n89"/>
+                                    <outlet property="comicTitleLabel" destination="hsa-tP-wvK" id="vkK-P2-I6y"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
