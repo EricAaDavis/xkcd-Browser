@@ -13,12 +13,13 @@ protocol ComicBrowserViewModelDelegate: AnyObject {
 
 final class ComicBrowserViewModel {
     
-    weak var delegate: ComicBrowserViewModelDelegate?
-    
-    enum Section: Hashable, Comparable {
+    enum Section {
         case latestComic
         case comics
     }
+
+    
+    weak var delegate: ComicBrowserViewModelDelegate?
     
     typealias Item = Comic
     
@@ -34,7 +35,7 @@ final class ComicBrowserViewModel {
             switch result {
             case .success(let comic):
                 self.model.latestComic = comic
-                let newestComic = comic.number
+                let newestComic = comic.number - 1
                 let lastComicToFetch = comic.number - 20
                 self.getPreviousComicsForNumber(from: newestComic, to: lastComicToFetch)
             case .failure(let error):
@@ -68,14 +69,7 @@ final class ComicBrowserViewModel {
         }
     }
     
-    func items() -> [Section: [Item]] {
-        
-        var items: [Section: [Comic]] = [Section.comics: model.comics!]
-        
-        items[Section.latestComic] = [model.latestComic!]
-        
-        return items
-    }
+    
 }
 
 struct Model {
