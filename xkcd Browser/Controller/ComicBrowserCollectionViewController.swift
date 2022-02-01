@@ -7,7 +7,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "ComicCell"
 
 class ComicBrowserCollectionViewController: UICollectionViewController {
 
@@ -16,28 +16,54 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         
         viewModel.delegate = self
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-
+        
+        dataSource = createDataSource()
+        collectionView.dataSource = dataSource
+        
         //First we get the latest comic
         viewModel.getLatestComicWithPreviousTwenty()
         
     }
     
+    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>
+    
     let viewModel = ComicBrowserViewModel()
     
+    var dataSource: DataSourceType!
     
-    func checkData() {
-        viewModel.items()
+    func createDataSource() -> DataSourceType {
+        let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ComicCollectionViewCell
+            
+            let title = item.title
+            let comicNumber = String("#\(item.number)")
+            
+            cell.setupCell(comicTitle: title, comicNumber: comicNumber)
+            
+            return cell
+        }
+        return dataSource
+    }
+    
+    func updateCollectionView() {
+        //First build a dictionary that maps each section to its associated array of items
+        
+        let itemsResult = viewModel.items()
+        
+        var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
+        snapshot.appendSections([ComicBrowserViewModel.Section.latestComic, ComicBrowserViewModel.Section.comics])
+        
+        snapshot.appendItems([viewModel.model.latestComic!], toSection: .latestComic)
+        snapshot.appendItems(viewModel.model.comics!, toSection: .comics)
+        
+        dataSource.apply(snapshot)
+        
+        
     }
 }
 
 extension ComicBrowserCollectionViewController: ComicBrowserViewModelDelegate {
     func itemsChanged() {
-        checkData()
+        updateCollectionView()
     }
 }

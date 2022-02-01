@@ -13,10 +13,9 @@ class ComicCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var comicNumberLabel: UILabel!
     @IBOutlet weak var comicImageView: UIImageView!
     
-    func setupCell(comicTitle: String, comicNumber: String, comicImage: UIImage) {
+    func setupCell(comicTitle: String, comicNumber: String) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = comicNumber
-        comicImageView.image = comicImage
     }
     
 }

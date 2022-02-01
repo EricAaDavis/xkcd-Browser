@@ -20,6 +20,8 @@ final class ComicBrowserViewModel {
         case comics
     }
     
+    typealias Item = Comic
+    
     var model = Model()
     
     var latestComicNumber: Int? {
@@ -66,8 +68,13 @@ final class ComicBrowserViewModel {
         }
     }
     
-    func items() {
-        print(model)
+    func items() -> [Section: [Item]] {
+        
+        var items: [Section: [Comic]] = [Section.comics: model.comics!]
+        
+        items[Section.latestComic] = [model.latestComic!]
+        
+        return items
     }
 }
 
