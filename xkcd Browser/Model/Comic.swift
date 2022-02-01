@@ -8,7 +8,7 @@
 import Foundation
 
 struct Comic {
-    var comicNumber: Int
+    var number: Int
     var year: String
     var month: String
     var day: String
@@ -21,7 +21,7 @@ struct Comic {
     var img: URL
     
     enum CodingKeys: String, CodingKey {
-        case comicNumber = "num"
+        case number = "num"
         case year
         case month
         case day
@@ -38,7 +38,7 @@ struct Comic {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.comicNumber = try container.decode(Int.self, forKey: .comicNumber)
+        self.number = try container.decode(Int.self, forKey: .number)
         self.year = try container.decode(String.self, forKey: .year)
         self.month = try container.decode(String.self, forKey: .month)
         self.day = try container.decode(String.self, forKey: .day)
