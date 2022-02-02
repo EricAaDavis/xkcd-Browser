@@ -40,7 +40,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
             let comicNumber = String("#\(item.number)")
             cell.backgroundColor = .systemBlue
             cell.layer.cornerRadius = 15 
-            cell.setupCell(comicTitle: title, comicNumber: comicNumber)
+            cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
             
             return cell
         }
@@ -132,13 +132,11 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
                     bottom: spacing,
                     trailing: spacing
                 )
-                
                 return comicsSection
             }
         }
         return layout
     }
-    
 }
 
 extension ComicBrowserCollectionViewController: ComicBrowserViewModelDelegate {
