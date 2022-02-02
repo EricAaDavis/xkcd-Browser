@@ -33,34 +33,58 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         searchController.searchBar.placeholder = "Search for comic by number"
         searchController.searchBar.keyboardType = .numbersAndPunctuation
         
-        
-        viewModel.delegate = self
+        //Collection view setup
         dataSource = createDataSource()
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createLayout()
         collectionView.register(LatestComicSectionHeaderView.self, forSupplementaryViewOfKind: latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier)
         
-        //First we get the latest comic plus previous comics based on numberOfItemsToFetch
-        viewModel.getLatestComicWithNumberOfItemsToFetch()
+        viewModel.delegate = self
         
+        //When the view loads we get the latest comic plus previous comics based on numberOfItemsToFetch
+        viewModel.getLatestComicWithNumberOfItemsToFetch()
     }
     
+    
+    //Debouncing for the purpose of not sending an api request by every keystroke
     func updateSearchResults(for searchController: UISearchController) {
+        let selector = #selector(fetchComicByNumber)
         
+        //Prevents the call to the selector for the previous input
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: selector, object: nil)
+        
+        //0.3 seconds is considered to be just a perfect delay
+        perform(selector, with: nil, afterDelay: 0.3)
+    }
+    
+    @objc func fetchComicByNumber() {
+        guard let searchControllerText = searchController.searchBar.text else { return }
+        if searchControllerText != "" {
+            viewModel.getSpecificComicByNumber(numberString: searchControllerText)
+        } else {
+            viewModel.featuredComic = nil
+        }
     }
     
     func updateCollectionView() {
-        snapshot.deleteAllItems()
         guard let latestComic = viewModel.model.latestComic,
               let comics = viewModel.model.comics else { return }
         
-        let sortedComics = comics.sorted { lhs, rhs in
-            lhs.number > rhs.number
-        }
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.featuredComic, .comics])
         
-        snapshot.appendSections([.latestComic, .comics])
-        snapshot.appendItems([latestComic], toSection: .latestComic)
-        snapshot.appendItems(sortedComics, toSection: .comics)
+        let searchedComic = viewModel.featuredComic
+        
+        if searchedComic != nil {
+            snapshot.appendItems([searchedComic!], toSection: .featuredComic)
+            snapshot.appendItems([], toSection: .comics)
+        } else {
+            snapshot.appendItems([latestComic], toSection: .featuredComic)
+            let sortedComics = comics.sorted { lhs, rhs in
+                lhs.number > rhs.number
+            }
+            snapshot.appendItems(sortedComics, toSection: .comics)
+        }
         dataSource.apply(snapshot)
     }
     
@@ -82,7 +106,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             
             let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
             switch section {
-            case .latestComic:
+            case .featuredComic:
                 header.nameLabel.text = "Latest Comic"
                 header.nameLabel.font = UIFont.boldSystemFont(ofSize: 25)
             case .comics:
@@ -97,7 +121,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
             
             switch self.snapshot.sectionIdentifiers[sectionIndex]  {
-            case .latestComic:
+            case .featuredComic:
                 let latesComicItemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
                     heightDimension: .fractionalHeight(1)

@@ -14,7 +14,7 @@ protocol ComicBrowserViewModelDelegate: AnyObject {
 final class ComicBrowserViewModel {
     
     enum Section {
-        case latestComic
+        case featuredComic
         case comics
     }
     
@@ -23,6 +23,11 @@ final class ComicBrowserViewModel {
     typealias Item = Comic
     
     var model = Model()
+    var featuredComic: Comic? {
+        didSet {
+            delegate?.itemsChanged()
+        }
+    }
     
     //This variable is the number of items to fetch for getPreviousComicsForNumber
     let numberOfItemsToFetch = 21
@@ -40,6 +45,7 @@ final class ComicBrowserViewModel {
     //MARK: Networking methods for the browse view model.
     //Gets the latest comic
     func getLatestComicWithNumberOfItemsToFetch() {
+        model.comics = []
         LatestComicRequest().send { result in
             switch result {
             case .success(let comic):
@@ -73,6 +79,20 @@ final class ComicBrowserViewModel {
         //The group notifies whenever all comics have been fetched
         group.notify(queue: .main) {
             self.delegate?.itemsChanged()
+        }
+    }
+    
+    func getSpecificComicByNumber(numberString: String) {
+        ComicByNumberRequest(comicNumber: numberString).send { result in
+            switch result {
+            case .success(let comic):
+                self.featuredComic = comic
+            case .failure(let error):
+                print(error)
+            }
+            DispatchQueue.main.async {
+                self.delegate?.itemsChanged()
+            }
         }
     }
 }
