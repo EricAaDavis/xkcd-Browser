@@ -21,8 +21,8 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createLayout()
         
-        //First we get the latest comic
-        viewModel.getLatestComicWithPreviousTwenty()
+        //First we get the latest comic plus previous comics based on numberOfItemsToFetch
+        viewModel.getLatestComicWithNumberOfItemsToFetch()
         
     }
     
@@ -31,6 +31,8 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
     let viewModel = ComicBrowserViewModel()
     
     var dataSource: DataSourceType!
+    
+    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
     
     func createDataSource() -> DataSourceType {
         let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
@@ -47,14 +49,12 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         return dataSource
     }
     
-    
-    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
-    
     func updateCollectionView() {
-        snapshot.deleteAllItems()
-        
         guard let latestComic = viewModel.model.latestComic,
               let comics = viewModel.model.comics else { return }
+        
+        
+        snapshot.deleteAllItems()
         
         let sortedComics = comics.sorted { lhs, rhs in
             lhs.number > rhs.number
@@ -63,8 +63,6 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         snapshot.appendSections([.latestComic, .comics])
         snapshot.appendItems([latestComic], toSection: .latestComic)
         snapshot.appendItems(sortedComics, toSection: .comics)
-        
-       
         dataSource.apply(snapshot)
     }
     
@@ -137,8 +135,30 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         }
         return layout
     }
+    
+    var perform = 0
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item == (viewModel.model.comics!.count - 4) {
+            viewModel.getNextComics()
+        }
+//        if indexPath.item == (viewModel.model.comics!.count - 4) && perform == 0 {
+//            print("perform new data request")
+//            viewModel.getPreviousComicsForNumber(from: 2535, to: 2554)
+//            perform = 1
+//        } else if indexPath.item == (viewModel.model.comics!.count - 4) &&  perform == 1 {
+//            viewModel.getPreviousComicsForNumber(from: 2515, to: 2534)
+//            perform = 2
+//        }
+        
+//        print(viewModel.model.comics?.count)
+    }
+    
+    
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print(collectionView.indexPathsForVisibleItems)
+//    }
+    
 }
-
 extension ComicBrowserCollectionViewController: ComicBrowserViewModelDelegate {
     func itemsChanged() {
         updateCollectionView()

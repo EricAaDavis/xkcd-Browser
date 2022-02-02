@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        URLCache.shared.memoryCapacity = 500_000_000
+        URLCache.shared.diskCapacity = 1_000_000_000
         return true
     }
 

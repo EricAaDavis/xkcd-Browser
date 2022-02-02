@@ -13,6 +13,10 @@ class ComicCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var comicNumberLabel: UILabel!
     @IBOutlet weak var comicImageView: UIImageView!
     
+    override func prepareForReuse() {
+        comicImageView.image = nil
+    }
+    
     func setupCell(comicTitle: String, comicNumber: String, imageURL: URL) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = comicNumber
@@ -25,8 +29,6 @@ class ComicCollectionViewCell: UICollectionViewCell {
             case .failure(let error):
                 print("Unable to get image - \(error)")
             }
-            
         }
     }
-    
 }
