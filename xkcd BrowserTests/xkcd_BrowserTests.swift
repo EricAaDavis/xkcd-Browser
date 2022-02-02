@@ -21,9 +21,7 @@ class ComicNetworkingTests: XCTestCase {
             case .failure(_):
                 break
             }
-            
         }
-        
         waitForExpectations(timeout: 1)
     }
     
@@ -38,7 +36,6 @@ class ComicNetworkingTests: XCTestCase {
                 break
             }
         }
-        
         waitForExpectations(timeout: 1)
     }
     
@@ -61,8 +58,6 @@ class ComicNetworkingTests: XCTestCase {
                 break
             }
         }
-        
         waitForExpectations(timeout: 1)
     }
-
 }

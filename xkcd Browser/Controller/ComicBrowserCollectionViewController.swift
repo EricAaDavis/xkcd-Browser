@@ -11,7 +11,7 @@ private let comicCellReuseIdentifier = "ComicCell"
 private let latestComicSectionHeaderKind = "LatestComicKind"
 
 class ComicBrowserCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
-  
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let viewModel = ComicBrowserViewModel()
@@ -26,8 +26,10 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
+        
         //Seturp Search Controller
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
@@ -70,9 +72,6 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     }
     
     func updateCollectionView() {
-        
-        activityIndicator.stopAnimating()
-        
         guard let latestComic = viewModel.model.latestComic,
               let comics = viewModel.model.comics else { return }
         
@@ -91,7 +90,12 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             }
             snapshot.appendItems(sortedComics, toSection: .comics)
         }
+        
         dataSource.apply(snapshot)
+        
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     func createDataSource() -> DataSourceType {
@@ -130,20 +134,19 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             case .featuredComic:
                 let latesComicItemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .fractionalHeight(1)
-                )
+                    heightDimension: .fractionalHeight(1))
                 
                 let latestComicItem = NSCollectionLayoutItem(layoutSize: latesComicItemSize)
                 
                 let latestComicGroupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(0.75),
-                    heightDimension: .fractionalWidth(0.75)
-                )
+                    heightDimension: .fractionalWidth(0.75))
+                
                 let latestComicGroup = NSCollectionLayoutGroup.vertical(
                     layoutSize: latestComicGroupSize,
                     subitem: latestComicItem,
                     count: 1)
-               
+                
                 //Create the header layout
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(45))
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: latestComicSectionHeaderKind, alignment: .top)
@@ -211,6 +214,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         return layout
     }
     
+    //This function is used to fetch the next set of comics when the user scrolls to the last 4th cell
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == (viewModel.model.comics!.count - 4) {
             viewModel.getNextComics()

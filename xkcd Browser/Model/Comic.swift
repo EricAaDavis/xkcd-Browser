@@ -32,12 +32,11 @@ struct Comic {
         case titleText = "alt"
         case transcript
         case img
-
     }
-
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
+        
         self.number = try container.decode(Int.self, forKey: .number)
         self.year = try container.decode(String.self, forKey: .year)
         self.month = try container.decode(String.self, forKey: .month)
