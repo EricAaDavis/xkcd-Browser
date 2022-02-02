@@ -12,6 +12,8 @@ private let latestComicSectionHeaderKind = "LatestComicKind"
 
 class ComicBrowserCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
   
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     let viewModel = ComicBrowserViewModel()
     
     var dataSource: DataSourceType!
@@ -24,7 +26,8 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
         //Seturp Search Controller
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
@@ -67,6 +70,9 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     }
     
     func updateCollectionView() {
+        
+        activityIndicator.stopAnimating()
+        
         guard let latestComic = viewModel.model.latestComic,
               let comics = viewModel.model.comics else { return }
         
@@ -95,7 +101,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             let title = item.title
             let comicNumber = String("#\(item.number)")
             cell.backgroundColor = .systemBlue
-            cell.layer.cornerRadius = 15 
+            cell.layer.cornerRadius = 20
             cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
             
             return cell

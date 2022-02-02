@@ -20,22 +20,23 @@ final class ComicBrowserViewModel {
     
     weak var delegate: ComicBrowserViewModelDelegate?
     
+    //Typaliesed to create a meaningful distingtion between the view model and the model itself
     typealias Item = Comic
     
     var model = Model()
+    
     var featuredComic: Comic? {
         didSet {
             delegate?.itemsChanged()
         }
     }
     
-    //This variable is the number of items to fetch for getPreviousComicsForNumber
-    let numberOfItemsToFetch = 21
-    var newestComicNumber = 0
-    var lastComicNumber: Int {
+    private var newestComicNumber = 0
+    //numberOfItemsToFetch is the number of items to fetch for getPreviousComicsForNumber
+    private let numberOfItemsToFetch = 21
+    private var lastComicNumber: Int {
         newestComicNumber - numberOfItemsToFetch
     }
-    
     //Get the next comics in queue.
     func getNextComics() {
         newestComicNumber -= (numberOfItemsToFetch + 1)
@@ -73,7 +74,6 @@ final class ComicBrowserViewModel {
                 }
                 group.leave()
             }
-            
         }
         
         //The group notifies whenever all comics have been fetched
@@ -82,6 +82,7 @@ final class ComicBrowserViewModel {
         }
     }
     
+    //Gets a specific comic by its comic number
     func getSpecificComicByNumber(numberString: String) {
         ComicByNumberRequest(comicNumber: numberString).send { result in
             switch result {
@@ -97,6 +98,7 @@ final class ComicBrowserViewModel {
     }
 }
 
+//Creates a nice seperation of the model from the view model
 struct Model {
     var latestComic: Comic?
     var comics: [Comic]? = []
