@@ -25,7 +25,7 @@ final class ComicBrowserViewModel {
     var model = Model()
     
     //This variable is the number of items to fetch for getPreviousComicsForNumber
-    let numberOfItemsToFetch = 15
+    let numberOfItemsToFetch = 21
     var newestComicNumber = 0
     var lastComicNumber: Int {
         newestComicNumber - numberOfItemsToFetch
@@ -52,7 +52,7 @@ final class ComicBrowserViewModel {
         }
     }
     
-    //Gets comics for comic number between a range of comic numbers
+    //Gets comics for comic number within a range of commic numbers
     func getPreviousComicsForNumber(from oldetsComic: Int, to newestComic: Int) {
         let group = DispatchGroup()
         for comicNumber in oldetsComic...newestComic {
@@ -62,7 +62,6 @@ final class ComicBrowserViewModel {
                 switch result {
                 case .success(let comic):
                     self.model.comics?.append(comic)
-                    
                 case .failure(let error):
                     print(error)
                 }

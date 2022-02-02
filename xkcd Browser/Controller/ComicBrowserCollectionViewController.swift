@@ -7,54 +7,52 @@
 
 import UIKit
 
-private let reuseIdentifier = "ComicCell"
+private let comicCellReuseIdentifier = "ComicCell"
+private let latestComicSectionHeaderKind = "LatestComicKind"
 
-class ComicBrowserCollectionViewController: UICollectionViewController {
+class ComicBrowserCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
+  
+    let viewModel = ComicBrowserViewModel()
+    
+    var dataSource: DataSourceType!
+    
+    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>
+    
+    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
+    
+    let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.delegate = self
-
+        //Seturp Search Controller
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.automaticallyShowsSearchResultsController = true
+        searchController.searchBar.placeholder = "Search for comic by number"
+        searchController.searchBar.keyboardType = .numbersAndPunctuation
         
+        
+        viewModel.delegate = self
         dataSource = createDataSource()
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createLayout()
+        collectionView.register(LatestComicSectionHeaderView.self, forSupplementaryViewOfKind: latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier)
         
         //First we get the latest comic plus previous comics based on numberOfItemsToFetch
         viewModel.getLatestComicWithNumberOfItemsToFetch()
         
     }
     
-    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>
-    
-    let viewModel = ComicBrowserViewModel()
-    
-    var dataSource: DataSourceType!
-    
-    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
-    
-    func createDataSource() -> DataSourceType {
-        let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ComicCollectionViewCell
-            
-            let title = item.title
-            let comicNumber = String("#\(item.number)")
-            cell.backgroundColor = .systemBlue
-            cell.layer.cornerRadius = 15 
-            cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
-            
-            return cell
-        }
-        return dataSource
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
     
     func updateCollectionView() {
+        snapshot.deleteAllItems()
         guard let latestComic = viewModel.model.latestComic,
               let comics = viewModel.model.comics else { return }
-        
-        
-        snapshot.deleteAllItems()
         
         let sortedComics = comics.sorted { lhs, rhs in
             lhs.number > rhs.number
@@ -64,6 +62,35 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
         snapshot.appendItems([latestComic], toSection: .latestComic)
         snapshot.appendItems(sortedComics, toSection: .comics)
         dataSource.apply(snapshot)
+    }
+    
+    func createDataSource() -> DataSourceType {
+        let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: comicCellReuseIdentifier, for: indexPath) as! ComicCollectionViewCell
+            
+            let title = item.title
+            let comicNumber = String("#\(item.number)")
+            cell.backgroundColor = .systemBlue
+            cell.layer.cornerRadius = 15 
+            cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
+            
+            return cell
+        }
+        
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier, for: indexPath) as! LatestComicSectionHeaderView
+            
+            let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            switch section {
+            case .latestComic:
+                header.nameLabel.text = "Latest Comic"
+                header.nameLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            case .comics:
+                header.nameLabel.text = "All Comics"
+            }
+            return header
+        }
+        return dataSource
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
@@ -79,24 +106,29 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
                 let latestComicItem = NSCollectionLayoutItem(layoutSize: latesComicItemSize)
                 
                 let latestComicGroupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.7),
-                    heightDimension: .fractionalWidth(0.7)
+                    widthDimension: .fractionalWidth(0.75),
+                    heightDimension: .fractionalWidth(0.75)
                 )
                 let latestComicGroup = NSCollectionLayoutGroup.vertical(
                     layoutSize: latestComicGroupSize,
                     subitem: latestComicItem,
                     count: 1)
-                
+               
+                //Create the header layout
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(45))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: latestComicSectionHeaderKind, alignment: .top)
+                sectionHeader.pinToVisibleBounds = true
                 
                 let latestComicSection = NSCollectionLayoutSection(group: latestComicGroup)
                 let spacing: CGFloat = 10
                 latestComicSection.contentInsets = NSDirectionalEdgeInsets(
                     top: spacing,
-                    leading: spacing,
+                    leading: 0,
                     bottom: spacing,
-                    trailing: spacing
+                    trailing: 0
                 )
                 
+                latestComicSection.boundarySupplementaryItems = [sectionHeader]
                 latestComicSection.orthogonalScrollingBehavior = .groupPagingCentered
                 
                 return latestComicSection
@@ -113,7 +145,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
                 
                 let comicsGroupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .fractionalWidth(0.45)
+                    heightDimension: .fractionalWidth(0.5)
                 )
                 let comicsGroup = NSCollectionLayoutGroup.horizontal (
                     layoutSize: comicsGroupSize,
@@ -121,46 +153,43 @@ class ComicBrowserCollectionViewController: UICollectionViewController {
                     count: 2)
                 
                 comicsGroup.interItemSpacing = .fixed(spacing)
+                comicsGroup.contentInsets = NSDirectionalEdgeInsets(
+                    top: 0,
+                    leading: spacing,
+                    bottom: 0,
+                    trailing: spacing
+                )
+                
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: latestComicSectionHeaderKind, alignment: .top)
+                sectionHeader.pinToVisibleBounds = true
                 
                 let comicsSection = NSCollectionLayoutSection(group: comicsGroup)
                 comicsSection.interGroupSpacing = spacing
                 comicsSection.contentInsets = NSDirectionalEdgeInsets(
                     top: spacing,
-                    leading: spacing,
+                    leading: 0,
                     bottom: spacing,
-                    trailing: spacing
+                    trailing: 0
                 )
+                
+                comicsSection.boundarySupplementaryItems = [sectionHeader]
+                
                 return comicsSection
             }
         }
         return layout
     }
     
-    var perform = 0
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == (viewModel.model.comics!.count - 4) {
             viewModel.getNextComics()
         }
-//        if indexPath.item == (viewModel.model.comics!.count - 4) && perform == 0 {
-//            print("perform new data request")
-//            viewModel.getPreviousComicsForNumber(from: 2535, to: 2554)
-//            perform = 1
-//        } else if indexPath.item == (viewModel.model.comics!.count - 4) &&  perform == 1 {
-//            viewModel.getPreviousComicsForNumber(from: 2515, to: 2534)
-//            perform = 2
-//        }
-        
-//        print(viewModel.model.comics?.count)
     }
-    
-    
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print(collectionView.indexPathsForVisibleItems)
-//    }
-    
 }
 extension ComicBrowserCollectionViewController: ComicBrowserViewModelDelegate {
     func itemsChanged() {
         updateCollectionView()
     }
 }
+
