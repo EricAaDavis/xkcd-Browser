@@ -12,6 +12,14 @@ class ComicCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var comicTitleLabel: UILabel!
     @IBOutlet weak var comicNumberLabel: UILabel!
     @IBOutlet weak var comicImageView: UIImageView!
+    @IBOutlet weak var comicNumberLabelContainer: UIView!
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        comicNumberLabelContainer.layer.cornerRadius = 10
+    }
     
     override func prepareForReuse() {
         comicImageView.image = nil

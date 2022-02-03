@@ -129,7 +129,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             
             let title = item.title
             let comicNumber = String("#\(item.number)")
-            cell.backgroundColor = .systemBlue
+            cell.backgroundColor = UIColor(named: "xkcd color")
             cell.layer.cornerRadius = 20
             cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
             
