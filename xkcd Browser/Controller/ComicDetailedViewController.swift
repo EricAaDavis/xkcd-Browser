@@ -23,18 +23,19 @@ class ComicDetailedViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         updateUI()
-        
     }
-
     
+    //Latest comic number is used to indicate to the user that there are no newer comics by disabling the next button
     let latestComicNumber = ComicBrowserViewModel.latestComicNumber
     
+    //The comic currently displayed
     var currentComic: Comic?
     var currentComicNumber: Int? {
         currentComic?.number
     }
     
     func updateUI() {
+        checkIfNext()
         guard let comic = currentComic else { return }
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
@@ -53,9 +54,14 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
+    //Checks wether there is a next comic or the first comic is displayed. If ither are true, disable the respectable button.
     func checkIfNext() {
+        nextComicButton.isEnabled = true
+        previousComicButton.isEnabled = true
         if currentComicNumber! == latestComicNumber! {
-            
+            nextComicButton.isEnabled = false
+        } else if currentComicNumber! == 1 {
+            previousComicButton.isEnabled = false
         }
     }
     
@@ -79,9 +85,6 @@ class ComicDetailedViewController: UIViewController {
             let previousComicToRequest = currentComicNumber + 1
             sendComicRequest(for: previousComicToRequest)
         }
-        
-        
-        
     }
     
     @IBAction func previousComic(_ sender: Any) {
@@ -90,6 +93,5 @@ class ComicDetailedViewController: UIViewController {
             sendComicRequest(for: nextComicToRequest)
         }
     }
-    
 }
 
