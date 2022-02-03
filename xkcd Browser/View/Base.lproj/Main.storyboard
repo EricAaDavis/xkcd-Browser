@@ -42,6 +42,9 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="Previous" cornerStyle="capsule"/>
+                                                        <connections>
+                                                            <action selector="previousComic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UYT-BE-w6O"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="#2888" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2X-ZL-KJG">
                                                         <rect key="frame" x="166.5" y="3.5" width="65" height="24"/>
@@ -56,6 +59,9 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="Next" cornerStyle="capsule"/>
+                                                        <connections>
+                                                            <action selector="nextComic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jI7-Ul-6ZR"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -142,6 +148,8 @@
                         <outlet property="comicImageView" destination="OYk-CN-XrF" id="3nT-nF-oot"/>
                         <outlet property="comicNumberlabel" destination="j2X-ZL-KJG" id="OCw-cs-bLD"/>
                         <outlet property="comicTitleLabel" destination="xJq-6a-BjZ" id="dwX-YJ-x1f"/>
+                        <outlet property="nextComicButton" destination="YLt-qn-HOh" id="T5J-jG-hPB"/>
+                        <outlet property="previousComicButton" destination="Ggb-Zm-UWg" id="ehO-ph-6mx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

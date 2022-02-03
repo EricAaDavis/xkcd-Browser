@@ -15,6 +15,8 @@ class ComicDetailedViewController: UIViewController {
     @IBOutlet weak var comicNumberlabel: UILabel!
     @IBOutlet weak var altTextlabel: UILabel!
     @IBOutlet weak var transcriptTextlabel: UILabel!
+    @IBOutlet weak var nextComicButton: UIButton!
+    @IBOutlet weak var previousComicButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -51,6 +53,12 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
+    func checkIfNext() {
+        if currentComicNumber! == latestComicNumber! {
+            
+        }
+    }
+    
     func sendComicRequest(for comicNumber: Int) {
         let comicNumberString = String(comicNumber)
         ComicByNumberRequest(comicNumber: comicNumberString).send { result in
@@ -63,6 +71,23 @@ class ComicDetailedViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    @IBAction func nextComic(_ sender: Any) {
+        if let currentComicNumber = currentComicNumber {
+            let previousComicToRequest = currentComicNumber + 1
+            sendComicRequest(for: previousComicToRequest)
+        }
+        
+        
+        
+    }
+    
+    @IBAction func previousComic(_ sender: Any) {
+        if let currentComicNumber = currentComicNumber {
+            let nextComicToRequest = currentComicNumber - 1
+            sendComicRequest(for: nextComicToRequest)
         }
     }
     
