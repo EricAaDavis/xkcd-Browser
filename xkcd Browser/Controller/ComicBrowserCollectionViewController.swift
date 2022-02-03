@@ -9,6 +9,7 @@ import UIKit
 
 private let comicCellReuseIdentifier = "ComicCell"
 private let latestComicSectionHeaderKind = "LatestComicKind"
+private let detailedScreenSegueIdentifer = "ShowDetailedScreen"
 
 class ComicBrowserCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
     
@@ -18,11 +19,13 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     var dataSource: DataSourceType!
     
-    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>
+    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, Comic>
     
-    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
+    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, Comic>()
     
     let searchController = UISearchController()
+    
+    var selectedComic: Comic?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +39,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.automaticallyShowsSearchResultsController = true
         searchController.searchBar.placeholder = "Search for comic by number"
-        searchController.searchBar.keyboardType = .numbersAndPunctuation
+        searchController.searchBar.keyboardType = .numberPad
         
         //Collection view setup
         dataSource = createDataSource()
@@ -50,6 +53,28 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         viewModel.getLatestComicWithNumberOfItemsToFetch()
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var itemIndex = indexPath.item
+
+        if indexPath.section == 1 {
+            itemIndex += 1
+        }
+        
+        selectedComic = snapshot.itemIdentifiers[itemIndex]
+        
+        
+        self.performSegue(withIdentifier: detailedScreenSegueIdentifer, sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == detailedScreenSegueIdentifer {
+            if let destinationVC = segue.destination as? ComicDetailedViewController {
+                destinationVC.currentComic = selectedComic
+            }
+        }
+    }
     
     //Debouncing for the purpose of not sending an api request by every keystroke
     func updateSearchResults(for searchController: UISearchController) {
@@ -104,7 +129,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             
             let title = item.title
             let comicNumber = String("#\(item.number)")
-            cell.backgroundColor = .systemBlue
+            cell.backgroundColor = UIColor(named: "xkcd color")
             cell.layer.cornerRadius = 20
             cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
             
