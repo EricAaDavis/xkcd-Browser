@@ -19,9 +19,9 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     var dataSource: DataSourceType!
     
-    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>
+    typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, Comic>
     
-    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, ComicBrowserViewModel.Item>()
+    var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, Comic>()
     
     let searchController = UISearchController()
     

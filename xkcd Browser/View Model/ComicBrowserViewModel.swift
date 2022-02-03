@@ -20,9 +20,6 @@ final class ComicBrowserViewModel {
     
     weak var delegate: ComicBrowserViewModelDelegate?
     
-    //Typaliesed to create a meaningful distingtion between the view model and the model itself
-    typealias Item = Comic
-    
     var model = Model()
     
     var featuredComic: Comic? {
