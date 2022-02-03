@@ -24,6 +24,8 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     let searchController = UISearchController()
     
+    var selectedComic: Comic?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
