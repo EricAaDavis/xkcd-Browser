@@ -71,7 +71,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == detailedScreenSegueIdentifer {
             if let destinationVC = segue.destination as? ComicDetailedViewController {
-                destinationVC.comic = selectedComic
+                destinationVC.currentComic = selectedComic
             }
         }
     }

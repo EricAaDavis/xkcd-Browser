@@ -26,11 +26,14 @@ class ComicDetailedViewController: UIViewController {
 
     
     let latestComicNumber = ComicBrowserViewModel.latestComicNumber
-    var comic: Comic?
-    var comicNumber: Int?
+    
+    var currentComic: Comic?
+    var currentComicNumber: Int? {
+        currentComic?.number
+    }
     
     func updateUI() {
-        guard let comic = comic else { return }
+        guard let comic = currentComic else { return }
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
         altTextlabel.text = comic.titleText == "" ? "No alt text" : comic.titleText
@@ -49,7 +52,18 @@ class ComicDetailedViewController: UIViewController {
     }
     
     func sendComicRequest(for comicNumber: Int) {
-        
+        let comicNumberString = String(comicNumber)
+        ComicByNumberRequest(comicNumber: comicNumberString).send { result in
+            switch result {
+            case .success(let comic):
+                DispatchQueue.main.async {
+                    self.currentComic = comic
+                    self.updateUI()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }
