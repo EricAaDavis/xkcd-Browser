@@ -31,6 +31,9 @@ final class ComicBrowserViewModel {
         }
     }
     
+    
+    static var latestComicNumber: Int?
+    
     private var newestComicNumber = 0
     //numberOfItemsToFetch is the number of items to fetch for getPreviousComicsForNumber
     private let numberOfItemsToFetch = 21
@@ -50,6 +53,7 @@ final class ComicBrowserViewModel {
         LatestComicRequest().send { result in
             switch result {
             case .success(let comic):
+                ComicBrowserViewModel.latestComicNumber = comic.number
                 self.model.latestComic = comic
                 self.newestComicNumber = comic.number - 1
                 self.getPreviousComicsForNumber(from: self.lastComicNumber, to: self.newestComicNumber)
