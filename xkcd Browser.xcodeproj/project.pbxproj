@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20C6EA4A27A9487600546E32 /* ComicBrowserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C6EA4927A9487600546E32 /* ComicBrowserCollectionViewController.swift */; };
+		20C6EA4C27A9490900546E32 /* ComicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C6EA4B27A9490900546E32 /* ComicCollectionViewCell.swift */; };
+		20C6EA5027A94F9B00546E32 /* ComicBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C6EA4F27A94F9A00546E32 /* ComicBrowserViewModel.swift */; };
+		20C6EA5227A9761A00546E32 /* ComicBrowserUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C6EA5127A9761A00546E32 /* ComicBrowserUtils.swift */; };
+		20C9844C27AAAF74007F9BFC /* LatestComicSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C9844B27AAAF74007F9BFC /* LatestComicSectionHeaderView.swift */; };
 		20DA993027A8083600071988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA992F27A8083600071988 /* AppDelegate.swift */; };
 		20DA993227A8083600071988 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA993127A8083600071988 /* SceneDelegate.swift */; };
-		20DA993427A8083600071988 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA993327A8083600071988 /* ViewController.swift */; };
+		20DA993427A8083600071988 /* ComicBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA993327A8083600071988 /* ComicBrowserViewController.swift */; };
 		20DA993727A8083600071988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993527A8083600071988 /* Main.storyboard */; };
 		20DA993927A8083D00071988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993827A8083D00071988 /* Assets.xcassets */; };
 		20DA993C27A8083D00071988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20DA993A27A8083D00071988 /* LaunchScreen.storyboard */; };
 		20DA994727A8083E00071988 /* xkcd_BrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA994627A8083E00071988 /* xkcd_BrowserTests.swift */; };
+		20DA996527A80DED00071988 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA996427A80DED00071988 /* APIRequest.swift */; };
+		20DA996727A812FD00071988 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA996627A812FD00071988 /* Comic.swift */; };
+		20DA996927A8178100071988 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DA996827A8178100071988 /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,27 +32,27 @@
 			remoteGlobalIDString = 20DA992B27A8083600071988;
 			remoteInfo = "xkcd Browser";
 		};
-		20DA994D27A8083E00071988 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20DA992427A8083600071988 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 20DA992B27A8083600071988;
-			remoteInfo = "xkcd Browser";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20C6EA4927A9487600546E32 /* ComicBrowserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBrowserCollectionViewController.swift; sourceTree = "<group>"; };
+		20C6EA4B27A9490900546E32 /* ComicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicCollectionViewCell.swift; sourceTree = "<group>"; };
+		20C6EA4F27A94F9A00546E32 /* ComicBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBrowserViewModel.swift; sourceTree = "<group>"; };
+		20C6EA5127A9761A00546E32 /* ComicBrowserUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBrowserUtils.swift; sourceTree = "<group>"; };
+		20C9844B27AAAF74007F9BFC /* LatestComicSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestComicSectionHeaderView.swift; sourceTree = "<group>"; };
 		20DA992C27A8083600071988 /* xkcd Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xkcd Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20DA992F27A8083600071988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20DA993127A8083600071988 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		20DA993327A8083600071988 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		20DA993327A8083600071988 /* ComicBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBrowserViewController.swift; sourceTree = "<group>"; };
 		20DA993627A8083600071988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20DA993827A8083D00071988 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20DA993B27A8083D00071988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20DA993D27A8083D00071988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20DA994227A8083E00071988 /* xkcd BrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xkcd BrowserTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20DA994627A8083E00071988 /* xkcd_BrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xkcd_BrowserTests.swift; sourceTree = "<group>"; };
-		20DA994C27A8083E00071988 /* xkcd BrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xkcd BrowserUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20DA996427A80DED00071988 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		20DA996627A812FD00071988 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
+		20DA996827A8178100071988 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,16 +70,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20DA994927A8083E00071988 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20C6EA4D27A9493300546E32 /* Cell Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				20C6EA4B27A9490900546E32 /* ComicCollectionViewCell.swift */,
+			);
+			path = "Cell Controllers";
+			sourceTree = "<group>";
+		};
+		20C6EA4E27A94F7100546E32 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				20C6EA4F27A94F9A00546E32 /* ComicBrowserViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		20C6EA5327A9762700546E32 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				20C6EA5127A9761A00546E32 /* ComicBrowserUtils.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		20DA992327A8083600071988 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +111,6 @@
 			children = (
 				20DA992C27A8083600071988 /* xkcd Browser.app */,
 				20DA994227A8083E00071988 /* xkcd BrowserTests.xctest */,
-				20DA994C27A8083E00071988 /* xkcd BrowserUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,9 +120,12 @@
 			children = (
 				20DA992F27A8083600071988 /* AppDelegate.swift */,
 				20DA993127A8083600071988 /* SceneDelegate.swift */,
+				20DA996227A80DC500071988 /* Networking */,
 				20DA996127A8098F00071988 /* Controller */,
-				20DA996027A8098700071988 /* View */,
+				20C6EA4E27A94F7100546E32 /* View Model */,
 				20DA995F27A8098100071988 /* Model */,
+				20DA996027A8098700071988 /* View */,
+				20C6EA5327A9762700546E32 /* Helpers */,
 				20DA993827A8083D00071988 /* Assets.xcassets */,
 				20DA993D27A8083D00071988 /* Info.plist */,
 			);
@@ -116,6 +143,7 @@
 		20DA995F27A8098100071988 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20DA996627A812FD00071988 /* Comic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -132,9 +160,21 @@
 		20DA996127A8098F00071988 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				20DA993327A8083600071988 /* ViewController.swift */,
+				20C6EA4927A9487600546E32 /* ComicBrowserCollectionViewController.swift */,
+				20DA993327A8083600071988 /* ComicBrowserViewController.swift */,
+				20C9844B27AAAF74007F9BFC /* LatestComicSectionHeaderView.swift */,
+				20C6EA4D27A9493300546E32 /* Cell Controllers */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		20DA996227A80DC500071988 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				20DA996427A80DED00071988 /* APIRequest.swift */,
+				20DA996827A8178100071988 /* APIService.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,24 +215,6 @@
 			productReference = 20DA994227A8083E00071988 /* xkcd BrowserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		20DA994B27A8083E00071988 /* xkcd BrowserUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 20DA995C27A8083E00071988 /* Build configuration list for PBXNativeTarget "xkcd BrowserUITests" */;
-			buildPhases = (
-				20DA994827A8083E00071988 /* Sources */,
-				20DA994927A8083E00071988 /* Frameworks */,
-				20DA994A27A8083E00071988 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				20DA994E27A8083E00071988 /* PBXTargetDependency */,
-			);
-			name = "xkcd BrowserUITests";
-			productName = "xkcd BrowserUITests";
-			productReference = 20DA994C27A8083E00071988 /* xkcd BrowserUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -207,10 +229,6 @@
 						CreatedOnToolsVersion = 13.2.1;
 					};
 					20DA994127A8083E00071988 = {
-						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 20DA992B27A8083600071988;
-					};
-					20DA994B27A8083E00071988 = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 20DA992B27A8083600071988;
 					};
@@ -231,7 +249,6 @@
 			targets = (
 				20DA992B27A8083600071988 /* xkcd Browser */,
 				20DA994127A8083E00071988 /* xkcd BrowserTests */,
-				20DA994B27A8083E00071988 /* xkcd BrowserUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -254,13 +271,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20DA994A27A8083E00071988 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -268,8 +278,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20DA993427A8083600071988 /* ViewController.swift in Sources */,
+				20C6EA5227A9761A00546E32 /* ComicBrowserUtils.swift in Sources */,
+				20DA993427A8083600071988 /* ComicBrowserViewController.swift in Sources */,
 				20DA993027A8083600071988 /* AppDelegate.swift in Sources */,
+				20C6EA4C27A9490900546E32 /* ComicCollectionViewCell.swift in Sources */,
+				20C6EA4A27A9487600546E32 /* ComicBrowserCollectionViewController.swift in Sources */,
+				20C6EA5027A94F9B00546E32 /* ComicBrowserViewModel.swift in Sources */,
+				20DA996727A812FD00071988 /* Comic.swift in Sources */,
+				20DA996527A80DED00071988 /* APIRequest.swift in Sources */,
+				20DA996927A8178100071988 /* APIService.swift in Sources */,
+				20C9844C27AAAF74007F9BFC /* LatestComicSectionHeaderView.swift in Sources */,
 				20DA993227A8083600071988 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,13 +300,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20DA994827A8083E00071988 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -296,11 +307,6 @@
 			isa = PBXTargetDependency;
 			target = 20DA992B27A8083600071988 /* xkcd Browser */;
 			targetProxy = 20DA994327A8083E00071988 /* PBXContainerItemProxy */;
-		};
-		20DA994E27A8083E00071988 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 20DA992B27A8083600071988 /* xkcd Browser */;
-			targetProxy = 20DA994D27A8083E00071988 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -536,42 +542,6 @@
 			};
 			name = Release;
 		};
-		20DA995D27A8083E00071988 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 27BN3TK2LU;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "EricDavis.xkcd-BrowserUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "xkcd Browser";
-			};
-			name = Debug;
-		};
-		20DA995E27A8083E00071988 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 27BN3TK2LU;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "EricDavis.xkcd-BrowserUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "xkcd Browser";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -598,15 +568,6 @@
 			buildConfigurations = (
 				20DA995A27A8083E00071988 /* Debug */,
 				20DA995B27A8083E00071988 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		20DA995C27A8083E00071988 /* Build configuration list for PBXNativeTarget "xkcd BrowserUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				20DA995D27A8083E00071988 /* Debug */,
-				20DA995E27A8083E00071988 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
