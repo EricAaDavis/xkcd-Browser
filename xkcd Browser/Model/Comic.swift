@@ -16,7 +16,7 @@ struct Comic {
     var news: String
     var safeTitle: String
     var title: String
-    var titleText: String
+    var alt: String
     var transcript: String
     var img: URL
     
@@ -29,7 +29,7 @@ struct Comic {
         case news
         case safeTitle = "safe_title"
         case title
-        case titleText = "alt"
+        case alt
         case transcript
         case img
     }
@@ -45,7 +45,7 @@ struct Comic {
         self.news = try container.decode(String.self, forKey: .news)
         self.safeTitle = try container.decode(String.self, forKey: .safeTitle)
         self.title = try container.decode(String.self, forKey: .title)
-        self.titleText = try container.decode(String.self, forKey: .titleText)
+        self.alt = try container.decode(String.self, forKey: .alt)
         self.transcript = try container.decode(String.self, forKey: .transcript)
         self.img = try container.decode(URL.self, forKey: .img)
     }

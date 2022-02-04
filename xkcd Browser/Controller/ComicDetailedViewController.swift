@@ -19,16 +19,15 @@ class ComicDetailedViewController: UIViewController {
     @IBOutlet weak var previousComicButton: UIButton!
     @IBOutlet weak var saveComicButton: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateUI()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        updateUI()
-    }
-    
     let savedComicsManager = SavedComicsManager.shared
+    var storedComicDisplayed: StoredComic?
+    
+    //Latest comic number is used to indicate to the user that there are no newer comics by disabling the next button
+    let latestComicNumber = ComicBrowserViewModel.latestComicNumber
+    //The comic currently displayed
+    var currentComicDisplayed: Comic?
+    
+    //Checks whether the currently displayed comic is saved or not.
     var currentComicIsSaved: Bool {
         guard let currentComicNumber = currentComicNumber else {
             return false
@@ -39,14 +38,8 @@ class ComicDetailedViewController: UIViewController {
             return false
         }
     }
-    var storedComicDisplayed: StoredComic?
     
-    //Latest comic number is used to indicate to the user that there are no newer comics by disabling the next button
-    let latestComicNumber = ComicBrowserViewModel.latestComicNumber
-    
-    //The comic currently displayed
-    var currentComicDisplayed: Comic?
-    
+    //Gets the current comic number for the currently displayed comic
     var currentComicNumber: Int? {
         if let currentComicDisplayed = currentComicDisplayed {
             return currentComicDisplayed.number
@@ -55,21 +48,28 @@ class ComicDetailedViewController: UIViewController {
         }
         return nil
     }
-    var currentComicImage: UIImage?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        toggleSaveButtonImage()
+    }
     
     func updateForFetchedComic(_ comic: Comic) {
         checkIfNext()
         comicImageView.image = nil
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
-        altTextlabel.text = comic.titleText == "" ? "No alt text" : comic.titleText
+        altTextlabel.text = comic.alt == "" ? "No alt text" : comic.alt
         transcriptTextlabel.text = comic.transcript == "" ? "No Transcript" : comic.transcript
         ComicImageRequest(imageURL: comic.img).send() { result in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
                     self.comicImageView.image = image
-                    self.currentComicImage = image
                 }
             case .failure(let error):
                 print(error)
@@ -83,6 +83,7 @@ class ComicDetailedViewController: UIViewController {
         comicTitleLabel.text = comic.title
         altTextlabel.text = comic.alt
         transcriptTextlabel.text = comic.transcript
+        comicNumberlabel.text = "#\(comic.comicNumber)"
         comicImageView.image = comic.image?.imageFromBase64
     }
     
@@ -95,7 +96,7 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
-    //Checks wether there is a next comic or the first comic is displayed. If ither are true, disable the respectable button.
+    //Checks wether there is a next comic, or the first comic is displayed. If ither are true, disable the respectable button.
     func checkIfNext() {
         nextComicButton.isEnabled = true
         previousComicButton.isEnabled = true
@@ -106,21 +107,19 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
-
     func toggleSaveButtonImage() {
         if currentComicIsSaved {
             saveComicButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         } else {
             saveComicButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
-            
     }
     
     func toggleSave() {
         if currentComicIsSaved {
             savedComicsManager.removeSavedComicByComicNumber(comicNumberToRemove: currentComicNumber!)
         } else if let currentComicDisplayed = currentComicDisplayed {
-            savedComicsManager.save(currentComicDisplayed, currentComicImage: currentComicImage)
+            savedComicsManager.save(currentComicDisplayed, currentComicImage: comicImageView.image)
         } else if let storedComicDisplayed = storedComicDisplayed {
             savedComicsManager.save(storedComicDisplayed)
         }
@@ -159,7 +158,5 @@ class ComicDetailedViewController: UIViewController {
         toggleSave()
         toggleSaveButtonImage()        
     }
-    
-    
 }
 

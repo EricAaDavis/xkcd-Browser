@@ -37,7 +37,7 @@ final class SavedComicsManager {
         let comicToStore = StoredComic(
             comicNumber: comic.number,
             title: comic.title,
-            alt: comic.titleText,
+            alt: comic.alt,
             transcript: comic.title,
             image: imageData)
         
