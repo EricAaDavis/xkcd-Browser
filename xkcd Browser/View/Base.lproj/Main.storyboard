@@ -31,7 +31,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComicImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="OYk-CN-XrF">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no" translatesAutoresizingMaskIntoConstraints="NO" id="OYk-CN-XrF">
                                                 <rect key="frame" x="8" y="64" width="398" height="471.5"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cah-jo-WtC">
@@ -423,12 +423,12 @@
         <segue reference="7fd-Lo-jgO"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="ComicImagePlaceholder" width="382" height="311"/>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="no" width="128" height="128"/>
         <image name="text.quote" catalog="system" width="128" height="100"/>
         <namedColor name="xkcd color">
             <color red="0.60000002384185791" green="0.6589999794960022" blue="0.7839999794960022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

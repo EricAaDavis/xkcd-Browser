@@ -17,3 +17,5 @@ struct StoredComic {
 }
 
 extension StoredComic: Codable {  }
+
+extension StoredComic: Hashable {  }

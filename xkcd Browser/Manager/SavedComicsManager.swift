@@ -42,7 +42,6 @@ final class SavedComicsManager {
             image: imageData)
         
         store.storedComics.append(comicToStore)
-        
     }
     
     func getSavedComics() -> [StoredComic] {
@@ -58,5 +57,4 @@ final class SavedComicsManager {
         }
         store.storedComics = storedComics
     }
-    
 }

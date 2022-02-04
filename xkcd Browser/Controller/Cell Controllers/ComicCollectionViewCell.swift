@@ -25,7 +25,7 @@ class ComicCollectionViewCell: UICollectionViewCell {
     
     func setupCell(comicTitle: String, comicNumber: String, imageURL: URL) {
         comicTitleLabel.text = comicTitle
-        comicNumberLabel.text = comicNumber
+        comicNumberLabel.text = "#\(comicNumber)"
         ComicImageRequest(imageURL: imageURL).send { response in
             switch response {
             case .success(let image):
@@ -36,5 +36,18 @@ class ComicCollectionViewCell: UICollectionViewCell {
                 print("Unable to get image - \(error)")
             }
         }
+    }
+    
+    func setUpCell(comicTitle: String, comicNumber: String, imageData: Data?) {
+        comicTitleLabel.text = comicTitle
+        comicNumberLabel.text = "#\(comicNumber)"
+        
+        if let imageData = imageData {
+            let rebornImg = imageData.description.imageFromBase64
+            comicImageView.image = rebornImg
+        } else {
+            comicImageView.image = UIImage(systemName: "nosign")
+        }
+        
     }
 }

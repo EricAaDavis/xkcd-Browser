@@ -7,7 +7,6 @@
 
 import UIKit
 
-private let comicCellReuseIdentifier = "ComicCell"
 private let latestComicSectionHeaderKind = "LatestComicKind"
 private let detailedScreenSegueIdentifer = "ShowDetailedScreen"
 
@@ -17,9 +16,9 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     let viewModel = ComicBrowserViewModel()
     
-    var dataSource: DataSourceType!
-    
     typealias DataSourceType = UICollectionViewDiffableDataSource<ComicBrowserViewModel.Section, Comic>
+    
+    var dataSource: DataSourceType!
     
     var snapshot = NSDiffableDataSourceSnapshot<ComicBrowserViewModel.Section, Comic>()
     
@@ -125,7 +124,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     func createDataSource() -> DataSourceType {
         let dataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, item in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: comicCellReuseIdentifier, for: indexPath) as! ComicCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: C.shared.comicCellReuseIdentifier, for: indexPath) as! ComicCollectionViewCell
             
             let title = item.title
             let comicNumber = String("#\(item.number)")
