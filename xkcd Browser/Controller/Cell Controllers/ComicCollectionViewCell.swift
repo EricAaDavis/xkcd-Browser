@@ -38,12 +38,12 @@ class ComicCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setupCell(comicTitle: String, comicNumber: Int, imageData: Data?) {
+    func setupCell(comicTitle: String, comicNumber: Int, imageData: String?) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = "#\(comicNumber)"
         
         if let imageData = imageData {
-            let rebornImg = imageData.description.imageFromBase64
+            let rebornImg = imageData.imageFromBase64
             comicImageView.image = rebornImg
         } else {
             comicImageView.image = UIImage(systemName: "nosign")

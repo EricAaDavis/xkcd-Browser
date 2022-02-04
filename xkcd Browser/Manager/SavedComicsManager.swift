@@ -32,7 +32,7 @@ final class SavedComicsManager {
         guard let comic = comic,
               let currentComicImage = currentComicImage else { return }
         
-        let imageData = currentComicImage.jpegData(compressionQuality: 1)
+        let imageData = currentComicImage.base64
         
         let comicToStore = StoredComic(
             comicNumber: comic.number,

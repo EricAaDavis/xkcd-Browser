@@ -16,6 +16,7 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         
         dataSource = createDataSource()
         collectionView.dataSource = dataSource
+        collectionView.collectionViewLayout = createLayout()
         updateCollectionView()
     }
     
@@ -71,7 +72,7 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             subitem: item,
-            count: 2
+            count: 1
         )
         
         group.interItemSpacing = .fixed(spacing)
