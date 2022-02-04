@@ -108,6 +108,18 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         
         return layout
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration (identifier: nil, previewProvider: nil) { _ in
+            let item = self.dataSource.itemIdentifier(for: indexPath)!
+            let deleteToggle = UIAction(title: "Un-bookmark comic") { (action) in
+                let comicNumber = item.comicNumber
+                SavedComicsManager.shared.removeSavedComicByComicNumber(comicNumberToRemove: comicNumber)
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [deleteToggle])
+        }
+        return config
+    }
 }
 
 extension SavedComicsCollectionViewController: SavedComicsManagerDelegate {

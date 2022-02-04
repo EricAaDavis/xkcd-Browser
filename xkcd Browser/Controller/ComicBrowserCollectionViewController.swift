@@ -243,6 +243,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             viewModel.getNextComics()
         }
     }
+    
 }
 extension ComicBrowserCollectionViewController: ComicBrowserViewModelDelegate {
     func itemsChanged() {
