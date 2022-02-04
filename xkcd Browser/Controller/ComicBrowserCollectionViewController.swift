@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let latestComicSectionHeaderKind = "LatestComicKind"
-
 class ComicBrowserCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -43,35 +41,12 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         dataSource = createDataSource()
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createLayout()
-        collectionView.register(LatestComicSectionHeaderView.self, forSupplementaryViewOfKind: latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier)
+        collectionView.register(LatestComicSectionHeaderView.self, forSupplementaryViewOfKind: C.shared.latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier)
         
         viewModel.delegate = self
         
         //When the view loads we get the latest comic plus previous comics based on numberOfItemsToFetch
         viewModel.getLatestComicWithNumberOfItemsToFetch()
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        var itemIndex = indexPath.item
-
-        if indexPath.section == 1 {
-            itemIndex += 1
-        }
-        
-        selectedComic = snapshot.itemIdentifiers[itemIndex]
-        
-        
-        self.performSegue(withIdentifier: C.shared.detailedScreenSegueIdentiferFromBrowse, sender: nil)
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == C.shared.detailedScreenSegueIdentiferFromBrowse {
-            if let destinationVC = segue.destination as? ComicDetailedViewController {
-                destinationVC.currentComicDisplayed = selectedComic
-            }
-        }
     }
     
     //Debouncing for the purpose of not sending an api request by every keystroke
@@ -94,6 +69,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         }
     }
     
+    //MARK: - Collection View set up
     func updateCollectionView() {
         guard let latestComic = viewModel.model.latestComic,
               let comics = viewModel.model.comics else { return }
@@ -135,7 +111,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         }
         
         dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier, for: indexPath) as! LatestComicSectionHeaderView
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: C.shared.latestComicSectionHeaderKind, withReuseIdentifier: LatestComicSectionHeaderView.reuseIdentifier, for: indexPath) as! LatestComicSectionHeaderView
             
             let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
             switch section {
@@ -172,7 +148,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
                 
                 //Create the header layout
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(45))
-                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: latestComicSectionHeaderKind, alignment: .top)
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: C.shared.latestComicSectionHeaderKind, alignment: .top)
                 sectionHeader.pinToVisibleBounds = true
                 
                 let latestComicSection = NSCollectionLayoutSection(group: latestComicGroup)
@@ -217,7 +193,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
                 )
                 
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36))
-                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: latestComicSectionHeaderKind, alignment: .top)
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: C.shared.latestComicSectionHeaderKind, alignment: .top)
                 sectionHeader.pinToVisibleBounds = true
                 
                 let comicsSection = NSCollectionLayoutSection(group: comicsGroup)
@@ -237,6 +213,19 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         return layout
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var itemIndex = indexPath.item
+
+        if indexPath.section == 1 {
+            itemIndex += 1
+        }
+        
+        selectedComic = snapshot.itemIdentifiers[itemIndex]
+
+        self.performSegue(withIdentifier: C.shared.detailedScreenSegueIdentiferFromBrowse, sender: nil)
+        
+    }
+    
     //This function is used to fetch the next set of comics when the user scrolls to the last 4th cell
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == (viewModel.model.comics!.count - 4) {
@@ -244,7 +233,15 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == C.shared.detailedScreenSegueIdentiferFromBrowse {
+            if let destinationVC = segue.destination as? ComicDetailedViewController {
+                destinationVC.currentComicDisplayed = selectedComic
+            }
+        }
+    }
 }
+
 extension ComicBrowserCollectionViewController: ComicBrowserViewModelDelegate {
     func itemsChanged() {
         updateCollectionView()

@@ -18,6 +18,7 @@ class ComicDetailedViewController: UIViewController {
     @IBOutlet weak var nextComicButton: UIButton!
     @IBOutlet weak var previousComicButton: UIButton!
     @IBOutlet weak var saveComicButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let savedComicsManager = SavedComicsManager.shared
     var storedComicDisplayed: StoredComic?
@@ -32,6 +33,7 @@ class ComicDetailedViewController: UIViewController {
         guard let currentComicNumber = currentComicNumber else {
             return false
         }
+        
         if savedComicsManager.allSavedComicNumbers.contains(currentComicNumber) {
             return true
         } else {
@@ -51,6 +53,8 @@ class ComicDetailedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.hidesWhenStopped = true
+        
         updateUI()
     }
     
@@ -60,6 +64,7 @@ class ComicDetailedViewController: UIViewController {
     
     func updateForFetchedComic(_ comic: Comic) {
         checkIfNext()
+        activityIndicator.startAnimating()
         comicImageView.image = nil
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
@@ -70,6 +75,7 @@ class ComicDetailedViewController: UIViewController {
             case .success(let image):
                 DispatchQueue.main.async {
                     self.comicImageView.image = image
+                    self.activityIndicator.stopAnimating()
                 }
             case .failure(let error):
                 print(error)

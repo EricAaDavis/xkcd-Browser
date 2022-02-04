@@ -28,6 +28,7 @@ final class SavedComicsManager {
         return storedComicsByNumber
     }
     
+    //saves a Comic as a StoredComic
     func save(_ comic: Comic?, currentComicImage: UIImage?) {
         guard let comic = comic,
               let currentComicImage = currentComicImage else { return }
@@ -38,13 +39,14 @@ final class SavedComicsManager {
             comicNumber: comic.number,
             title: comic.title,
             alt: comic.alt,
-            transcript: comic.title,
+            transcript: comic.transcript,
             image: imageData)
         
         store.storedComics.append(comicToStore)
         delegate?.savedComicsUpdated()
     }
     
+    //Saves a stored comic if the user unsaves and saves a comic in the detailed view
     func save(_ comic: StoredComic) {
         store.storedComics.append(comic)
         delegate?.savedComicsUpdated()

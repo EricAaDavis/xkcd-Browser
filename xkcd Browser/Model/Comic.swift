@@ -49,7 +49,6 @@ struct Comic {
         self.transcript = try container.decode(String.self, forKey: .transcript)
         self.img = try container.decode(URL.self, forKey: .img)
     }
-    
 }
 
 extension Comic: Codable {  }

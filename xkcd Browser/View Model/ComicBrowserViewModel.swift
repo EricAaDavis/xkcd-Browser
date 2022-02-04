@@ -28,7 +28,6 @@ final class ComicBrowserViewModel {
         }
     }
     
-    
     static var latestComicNumber: Int?
     
     private var newestComicNumber = 0

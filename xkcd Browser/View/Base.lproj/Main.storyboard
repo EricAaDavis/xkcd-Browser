@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RDi-Qn-0rh">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -104,6 +104,9 @@
                                                     <action selector="saveComicButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RuN-1o-WH0"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ADg-do-bDo">
+                                                <rect key="frame" x="188.5" y="320.5" width="37" height="37"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="cah-jo-WtC" secondAttribute="trailing" constant="30" id="0yF-Mi-fLr"/>
@@ -114,12 +117,14 @@
                                             <constraint firstItem="IuT-8X-GfE" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="16" id="Fds-TS-DDx"/>
                                             <constraint firstItem="OYk-CN-XrF" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="8" id="I7a-FA-Feh"/>
                                             <constraint firstAttribute="trailing" secondItem="OYk-CN-XrF" secondAttribute="trailing" constant="8" id="ILP-KU-odc"/>
+                                            <constraint firstItem="ADg-do-bDo" firstAttribute="centerY" secondItem="99n-vc-tWH" secondAttribute="centerY" id="KO3-e3-FQR"/>
                                             <constraint firstItem="408-VR-X7S" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="16" id="Lu6-qg-sEa"/>
                                             <constraint firstItem="qAv-XD-S5a" firstAttribute="leading" secondItem="xJq-6a-BjZ" secondAttribute="trailing" constant="8" id="NcY-pW-Lec"/>
                                             <constraint firstItem="xJq-6a-BjZ" firstAttribute="top" secondItem="99n-vc-tWH" secondAttribute="top" constant="20" id="P2u-4z-ZSO"/>
                                             <constraint firstAttribute="trailing" secondItem="sJL-gw-rEP" secondAttribute="trailing" constant="20" id="PhT-xC-gfO"/>
                                             <constraint firstItem="408-VR-X7S" firstAttribute="top" secondItem="8Ce-CZ-fPT" secondAttribute="bottom" constant="20" id="VwD-ld-vIs"/>
                                             <constraint firstAttribute="trailing" secondItem="408-VR-X7S" secondAttribute="trailing" constant="16" id="XYF-HK-59a"/>
+                                            <constraint firstItem="ADg-do-bDo" firstAttribute="centerX" secondItem="99n-vc-tWH" secondAttribute="centerX" id="aSO-wL-Wmf"/>
                                             <constraint firstAttribute="trailing" secondItem="qAv-XD-S5a" secondAttribute="trailing" constant="8" id="acd-8g-g2z"/>
                                             <constraint firstItem="sJL-gw-rEP" firstAttribute="top" secondItem="408-VR-X7S" secondAttribute="bottom" constant="8" id="b6e-eB-Rac"/>
                                             <constraint firstAttribute="trailing" secondItem="IuT-8X-GfE" secondAttribute="trailing" constant="16" id="heh-0i-nzi"/>
@@ -156,6 +161,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Comic Detail" largeTitleDisplayMode="never" id="4e1-6E-xK1"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ADg-do-bDo" id="1Lf-GO-zNW"/>
                         <outlet property="altTextlabel" destination="8Ce-CZ-fPT" id="0wT-Tc-BUt"/>
                         <outlet property="comicImageView" destination="OYk-CN-XrF" id="3nT-nF-oot"/>
                         <outlet property="comicNumberlabel" destination="j2X-ZL-KJG" id="OCw-cs-bLD"/>

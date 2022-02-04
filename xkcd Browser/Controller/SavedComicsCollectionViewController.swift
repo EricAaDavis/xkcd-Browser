@@ -29,21 +29,6 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         collectionView.collectionViewLayout = createLayout()
         updateCollectionView()
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedComic = snapshot.itemIdentifiers[indexPath.item]
-        
-        self.performSegue(withIdentifier: C.shared.detailedScreenSegueIdentifierFromSaved, sender: nil)
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == C.shared.detailedScreenSegueIdentifierFromSaved {
-            if let destinationVC = segue.destination as? ComicDetailedViewController {
-                destinationVC.storedComicDisplayed = selectedComic
-            }
-        }
-    }
 
     func updateCollectionView() {
         let storedComicsToDisplay = SavedComicsManager.shared.getSavedComics()
@@ -84,13 +69,13 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.45)
+            heightDimension: .fractionalWidth(0.65)
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             subitem: item,
-            count: 1
+            count: 2
         )
         
         group.interItemSpacing = .fixed(spacing)
@@ -109,16 +94,30 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         return layout
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedComic = snapshot.itemIdentifiers[indexPath.item]
+        
+        self.performSegue(withIdentifier: C.shared.detailedScreenSegueIdentifierFromSaved, sender: nil)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration (identifier: nil, previewProvider: nil) { _ in
             let item = self.dataSource.itemIdentifier(for: indexPath)!
-            let deleteToggle = UIAction(title: "Un-bookmark comic") { (action) in
+            let deleteToggle = UIAction(title: "Un-save comic") { (action) in
                 let comicNumber = item.comicNumber
                 SavedComicsManager.shared.removeSavedComicByComicNumber(comicNumberToRemove: comicNumber)
             }
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [deleteToggle])
         }
         return config
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == C.shared.detailedScreenSegueIdentifierFromSaved {
+            if let destinationVC = segue.destination as? ComicDetailedViewController {
+                destinationVC.storedComicDisplayed = selectedComic
+            }
+        }
     }
 }
 

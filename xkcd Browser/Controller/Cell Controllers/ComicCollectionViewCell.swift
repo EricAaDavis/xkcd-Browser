@@ -23,6 +23,7 @@ class ComicCollectionViewCell: UICollectionViewCell {
         comicImageView.image = nil
     }
     
+    //Used to set up a cell for a fetched comic
     func setupCell(comicTitle: String, comicNumber: Int, imageURL: URL) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = "#\(comicNumber)"
@@ -38,6 +39,7 @@ class ComicCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //Used to set up a cell for a StoredComic
     func setupCell(comicTitle: String, comicNumber: Int, imageData: String?) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = "#\(comicNumber)"
@@ -48,6 +50,5 @@ class ComicCollectionViewCell: UICollectionViewCell {
         } else {
             comicImageView.image = UIImage(systemName: "nosign")
         }
-        
     }
 }
