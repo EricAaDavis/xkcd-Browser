@@ -17,12 +17,25 @@ class ComicDetailedViewController: UIViewController {
     @IBOutlet weak var transcriptTextlabel: UILabel!
     @IBOutlet weak var nextComicButton: UIButton!
     @IBOutlet weak var previousComicButton: UIButton!
-    
+    @IBOutlet weak var saveComicButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         updateUI()
+    }
+    
+    let savedComicsManager = SavedComicsManager.shared
+    
+    var currentComicIsSaved: Bool {
+        guard let currentComicNumber = currentComicNumber else {
+            return false
+        }
+        if savedComicsManager.allSavedComicNumbers.contains(currentComicNumber) {
+            return true
+        } else {
+            return false
+        }
     }
     
     //Latest comic number is used to indicate to the user that there are no newer comics by disabling the next button
@@ -33,9 +46,12 @@ class ComicDetailedViewController: UIViewController {
     var currentComicNumber: Int? {
         currentComic?.number
     }
+    var currentComicImage: UIImage?
     
     func updateUI() {
         checkIfNext()
+        checkIfSaved()
+        comicImageView.image = nil
         guard let comic = currentComic else { return }
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
@@ -47,11 +63,13 @@ class ComicDetailedViewController: UIViewController {
             case .success(let image):
                 DispatchQueue.main.async {
                     self.comicImageView.image = image
+                    self.currentComicImage = image
                 }
             case .failure(let error):
                 print(error)
             }
         }
+        print(currentComicIsSaved)
     }
     
     //Checks wether there is a next comic or the first comic is displayed. If ither are true, disable the respectable button.
@@ -62,6 +80,14 @@ class ComicDetailedViewController: UIViewController {
             nextComicButton.isEnabled = false
         } else if currentComicNumber! == 1 {
             previousComicButton.isEnabled = false
+        }
+    }
+    
+    func checkIfSaved() {
+        if currentComicIsSaved {
+            saveComicButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            saveComicButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
     }
     
@@ -80,18 +106,28 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
-    @IBAction func nextComic(_ sender: Any) {
+    @IBAction func nextComicButtonTapped(_ sender: Any) {
         if let currentComicNumber = currentComicNumber {
             let previousComicToRequest = currentComicNumber + 1
             sendComicRequest(for: previousComicToRequest)
         }
     }
     
-    @IBAction func previousComic(_ sender: Any) {
+    @IBAction func previousComicButtonTapped(_ sender: Any) {
         if let currentComicNumber = currentComicNumber {
             let nextComicToRequest = currentComicNumber - 1
             sendComicRequest(for: nextComicToRequest)
         }
     }
+    
+    @IBAction func saveComicButtonTapped(_ sender: Any) {
+        
+        savedComicsManager.save(currentComic!, currentComicImage: currentComicImage)
+        print(savedComicsManager.getSavedComics())
+        print(currentComicIsSaved)
+        
+    }
+    
+    
 }
 

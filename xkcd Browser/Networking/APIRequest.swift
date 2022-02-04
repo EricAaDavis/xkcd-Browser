@@ -90,3 +90,17 @@ extension APIRequest where Response == UIImage {
         }.resume()
     }
 }
+
+extension APIRequest where Response == Data {
+    func send(completion: @escaping (Result<Self.Response, Error>) -> Void) {
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let data = data {
+                completion(.success(data))
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                print("Could not get image data")
+            }
+        }
+    }
+}
