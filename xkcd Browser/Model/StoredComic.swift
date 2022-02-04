@@ -13,5 +13,7 @@ struct StoredComic {
     let title: String
     let alt: String
     let transcript: String
-    let image: UIImage
+    let image: Data
 }
+
+extension StoredComic: Codable {  }
