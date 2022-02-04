@@ -22,6 +22,8 @@ class SavedComicsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SavedComicsManager.shared.delegate = self
+        
         dataSource = createDataSource()
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createLayout()
@@ -105,5 +107,11 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+extension SavedComicsCollectionViewController: SavedComicsManagerDelegate {
+    func savedComicsUpdated() {
+        updateCollectionView()
     }
 }

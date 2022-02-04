@@ -21,7 +21,10 @@ class ComicDetailedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        updateUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         updateUI()
     }
     
@@ -75,6 +78,8 @@ class ComicDetailedViewController: UIViewController {
     }
     
     func updateForStoredComic(_ comic: StoredComic) {
+        nextComicButton.isHidden = true
+        previousComicButton.isHidden = true
         comicTitleLabel.text = comic.title
         altTextlabel.text = comic.alt
         transcriptTextlabel.text = comic.transcript
@@ -88,9 +93,6 @@ class ComicDetailedViewController: UIViewController {
         } else if let storedComicDisplayed = storedComicDisplayed {
             updateForStoredComic(storedComicDisplayed)
         }
-        
-        
-        print(currentComicIsSaved)
     }
     
     //Checks wether there is a next comic or the first comic is displayed. If ither are true, disable the respectable button.
@@ -117,8 +119,10 @@ class ComicDetailedViewController: UIViewController {
     func toggleSave() {
         if currentComicIsSaved {
             savedComicsManager.removeSavedComicByComicNumber(comicNumberToRemove: currentComicNumber!)
-        } else {
-            savedComicsManager.save(currentComicDisplayed!, currentComicImage: currentComicImage)
+        } else if let currentComicDisplayed = currentComicDisplayed {
+            savedComicsManager.save(currentComicDisplayed, currentComicImage: currentComicImage)
+        } else if let storedComicDisplayed = storedComicDisplayed {
+            savedComicsManager.save(storedComicDisplayed)
         }
     }
     

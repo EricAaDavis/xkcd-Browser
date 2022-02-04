@@ -14,7 +14,7 @@ protocol SavedComicsManagerDelegate: AnyObject {
 
 final class SavedComicsManager {
     
-    weak var savedComicsDelegate: SavedComicsManagerDelegate?
+    weak var delegate: SavedComicsManagerDelegate?
     
     static let shared = SavedComicsManager()
     
@@ -42,6 +42,12 @@ final class SavedComicsManager {
             image: imageData)
         
         store.storedComics.append(comicToStore)
+        delegate?.savedComicsUpdated()
+    }
+    
+    func save(_ comic: StoredComic) {
+        store.storedComics.append(comic)
+        delegate?.savedComicsUpdated()
     }
     
     func getSavedComics() -> [StoredComic] {
@@ -56,5 +62,6 @@ final class SavedComicsManager {
             storedComic.comicNumber == comicNumberToRemove
         }
         store.storedComics = storedComics
+        delegate?.savedComicsUpdated()
     }
 }
