@@ -34,6 +34,9 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no" translatesAutoresizingMaskIntoConstraints="NO" id="OYk-CN-XrF">
                                                 <rect key="frame" x="8" y="64" width="398" height="399"/>
                                             </imageView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ADg-do-bDo">
+                                                <rect key="frame" x="188.5" y="256" width="37" height="37"/>
+                                            </activityIndicatorView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cah-jo-WtC">
                                                 <rect key="frame" x="30" y="479" width="354" height="41"/>
                                                 <subviews>
@@ -108,20 +111,17 @@
                                                     <action selector="saveComicButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RuN-1o-WH0"/>
                                                 </connections>
                                             </button>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ADg-do-bDo">
-                                                <rect key="frame" x="188.5" y="325.5" width="37" height="37"/>
-                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="cah-jo-WtC" secondAttribute="trailing" constant="30" id="0yF-Mi-fLr"/>
                                             <constraint firstItem="8Ce-CZ-fPT" firstAttribute="top" secondItem="IuT-8X-GfE" secondAttribute="bottom" constant="8" id="4Y4-yt-N8f"/>
+                                            <constraint firstItem="ADg-do-bDo" firstAttribute="top" secondItem="xJq-6a-BjZ" secondAttribute="bottom" constant="200" id="5uc-bn-K7p"/>
                                             <constraint firstItem="cah-jo-WtC" firstAttribute="top" secondItem="OYk-CN-XrF" secondAttribute="bottom" constant="16" id="ChZ-lg-g93"/>
                                             <constraint firstItem="OYk-CN-XrF" firstAttribute="top" secondItem="xJq-6a-BjZ" secondAttribute="bottom" constant="8" id="F98-23-P0B"/>
                                             <constraint firstItem="8Ce-CZ-fPT" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="20" id="FGg-U5-4wb"/>
                                             <constraint firstItem="IuT-8X-GfE" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="16" id="Fds-TS-DDx"/>
                                             <constraint firstItem="OYk-CN-XrF" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="8" id="I7a-FA-Feh"/>
                                             <constraint firstAttribute="trailing" secondItem="OYk-CN-XrF" secondAttribute="trailing" constant="8" id="ILP-KU-odc"/>
-                                            <constraint firstItem="ADg-do-bDo" firstAttribute="centerY" secondItem="99n-vc-tWH" secondAttribute="centerY" id="KO3-e3-FQR"/>
                                             <constraint firstItem="408-VR-X7S" firstAttribute="leading" secondItem="99n-vc-tWH" secondAttribute="leading" constant="16" id="Lu6-qg-sEa"/>
                                             <constraint firstItem="qAv-XD-S5a" firstAttribute="leading" secondItem="xJq-6a-BjZ" secondAttribute="trailing" constant="8" id="NcY-pW-Lec"/>
                                             <constraint firstItem="xJq-6a-BjZ" firstAttribute="top" secondItem="99n-vc-tWH" secondAttribute="top" constant="20" id="P2u-4z-ZSO"/>
