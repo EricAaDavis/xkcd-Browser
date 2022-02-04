@@ -11,6 +11,14 @@ private let reuseIdentifier = "Cell"
 
 class SavedComicsCollectionViewController: UICollectionViewController {
 
+    typealias DataSourceType = UICollectionViewDiffableDataSource<String, StoredComic>
+    
+    var snapshot = NSDiffableDataSourceSnapshot<String, StoredComic>()
+    
+    var dataSource: DataSourceType!
+    
+    var selectedComic: StoredComic?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,20 +28,28 @@ class SavedComicsCollectionViewController: UICollectionViewController {
         updateCollectionView()
     }
     
-    typealias DataSourceType = UICollectionViewDiffableDataSource<String, StoredComic>
-    
-    var dataSource: DataSourceType!
-    
-    var selectedComic: StoredComic?
-    
-    func updateCollectionView() {
-        var snapshot = NSDiffableDataSourceSnapshot<String, StoredComic>()
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedComic = snapshot.itemIdentifiers[indexPath.item]
         
+        self.performSegue(withIdentifier: C.shared.detailedScreenSegueIdentifierFromSaved, sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == C.shared.detailedScreenSegueIdentifierFromSaved {
+            if let destinationVC = segue.destination as? ComicDetailedViewController {
+                destinationVC.storedComicDisplayed = selectedComic
+            }
+        }
+    }
+
+    func updateCollectionView() {
         let storedComicsToDisplay = SavedComicsManager.shared.getSavedComics()
         
+        snapshot.deleteAllItems()
         snapshot.appendSections(["Saved Comics"])
         snapshot.appendItems(storedComicsToDisplay)
-        
+
         dataSource.apply(snapshot)
     }
     

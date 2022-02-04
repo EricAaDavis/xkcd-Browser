@@ -12,4 +12,8 @@ struct C {
     static let shared = C()
     
     let comicCellReuseIdentifier = "ComicCell"
+    
+    //MARK: - Segue Identifiers
+    let detailedScreenSegueIdentiferFromBrowse = "ShowDetailedScreenFromBrowse"
+    let detailedScreenSegueIdentifierFromSaved = "ShowDetailedScreenFromSaved"
 }

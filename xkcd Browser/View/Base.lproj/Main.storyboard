@@ -253,7 +253,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Saved Comics" id="xGC-hU-8ds"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" id="7fd-Lo-jgO"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetailedScreenFromSaved" id="7fd-Lo-jgO"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jes-OK-xCs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -391,7 +391,7 @@
                     <navigationItem key="navigationItem" title="Comic Browser" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="2ne-9Q-QJt"/>
                     <connections>
                         <outlet property="activityIndicator" destination="cD5-vv-Q0K" id="Dwq-ej-PzW"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetailedScreen" id="wag-ga-cQb"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetailedScreenFromBrowse" id="wag-ga-cQb"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uv7-B1-ge3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

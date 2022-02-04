@@ -8,7 +8,6 @@
 import UIKit
 
 private let latestComicSectionHeaderKind = "LatestComicKind"
-private let detailedScreenSegueIdentifer = "ShowDetailedScreen"
 
 class ComicBrowserCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
     
@@ -63,14 +62,14 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         selectedComic = snapshot.itemIdentifiers[itemIndex]
         
         
-        self.performSegue(withIdentifier: detailedScreenSegueIdentifer, sender: nil)
+        self.performSegue(withIdentifier: C.shared.detailedScreenSegueIdentiferFromBrowse, sender: nil)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == detailedScreenSegueIdentifer {
+        if segue.identifier == C.shared.detailedScreenSegueIdentiferFromBrowse {
             if let destinationVC = segue.destination as? ComicDetailedViewController {
-                destinationVC.currentComic = selectedComic
+                destinationVC.currentComicDisplayed = selectedComic
             }
         }
     }

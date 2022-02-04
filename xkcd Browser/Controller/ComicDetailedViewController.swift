@@ -36,27 +36,31 @@ class ComicDetailedViewController: UIViewController {
             return false
         }
     }
+    var storedComicDisplayed: StoredComic?
     
     //Latest comic number is used to indicate to the user that there are no newer comics by disabling the next button
     let latestComicNumber = ComicBrowserViewModel.latestComicNumber
     
     //The comic currently displayed
-    var currentComic: Comic?
+    var currentComicDisplayed: Comic?
+    
     var currentComicNumber: Int? {
-        currentComic?.number
+        if let currentComicDisplayed = currentComicDisplayed {
+            return currentComicDisplayed.number
+        } else if let storedComicDisplayed = storedComicDisplayed {
+            return storedComicDisplayed.comicNumber
+        }
+        return nil
     }
     var currentComicImage: UIImage?
     
-    func updateUI() {
+    func updateForFetchedComic(_ comic: Comic) {
         checkIfNext()
-        toggleSaveButtonImage()
         comicImageView.image = nil
-        guard let comic = currentComic else { return }
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
         altTextlabel.text = comic.titleText == "" ? "No alt text" : comic.titleText
         transcriptTextlabel.text = comic.transcript == "" ? "No Transcript" : comic.transcript
-        
         ComicImageRequest(imageURL: comic.img).send() { result in
             switch result {
             case .success(let image):
@@ -68,6 +72,24 @@ class ComicDetailedViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    func updateForStoredComic(_ comic: StoredComic) {
+        comicTitleLabel.text = comic.title
+        altTextlabel.text = comic.alt
+        transcriptTextlabel.text = comic.transcript
+        comicImageView.image = comic.image?.imageFromBase64
+    }
+    
+    func updateUI() {
+        toggleSaveButtonImage()
+        if let currentComicDisplayed = currentComicDisplayed {
+            updateForFetchedComic(currentComicDisplayed)
+        } else if let storedComicDisplayed = storedComicDisplayed {
+            updateForStoredComic(storedComicDisplayed)
+        }
+        
+        
         print(currentComicIsSaved)
     }
     
@@ -96,7 +118,7 @@ class ComicDetailedViewController: UIViewController {
         if currentComicIsSaved {
             savedComicsManager.removeSavedComicByComicNumber(comicNumberToRemove: currentComicNumber!)
         } else {
-            savedComicsManager.save(currentComic!, currentComicImage: currentComicImage)
+            savedComicsManager.save(currentComicDisplayed!, currentComicImage: currentComicImage)
         }
     }
     
@@ -106,7 +128,7 @@ class ComicDetailedViewController: UIViewController {
             switch result {
             case .success(let comic):
                 DispatchQueue.main.async {
-                    self.currentComic = comic
+                    self.currentComicDisplayed = comic
                     self.updateUI()
                 }
             case .failure(let error):
