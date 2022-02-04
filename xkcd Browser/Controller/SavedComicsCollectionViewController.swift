@@ -13,6 +13,10 @@ class SavedComicsCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataSource = createDataSource()
+        collectionView.dataSource = dataSource
+        updateCollectionView()
     }
     
     typealias DataSourceType = UICollectionViewDiffableDataSource<String, StoredComic>
@@ -42,10 +46,47 @@ class SavedComicsCollectionViewController: UICollectionViewController {
             cell.backgroundColor = UIColor(named: "xkcd color")
             cell.layer.cornerRadius = 20
             
-            cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)
+            cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageData: item.image)
             
             return cell
         }
         return dataSource
+    }
+    
+    func createLayout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 20
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(0.45)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitem: item,
+            count: 2
+        )
+        
+        group.interItemSpacing = .fixed(spacing)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = spacing
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: spacing,
+            leading: spacing,
+            bottom: spacing,
+            trailing: spacing
+        )
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
     }
 }

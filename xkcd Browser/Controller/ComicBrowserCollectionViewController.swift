@@ -127,7 +127,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: C.shared.comicCellReuseIdentifier, for: indexPath) as! ComicCollectionViewCell
             
             let title = item.title
-            let comicNumber = String("#\(item.number)")
+            let comicNumber = item.number
             cell.backgroundColor = UIColor(named: "xkcd color")
             cell.layer.cornerRadius = 20
             cell.setupCell(comicTitle: title, comicNumber: comicNumber, imageURL: item.img)

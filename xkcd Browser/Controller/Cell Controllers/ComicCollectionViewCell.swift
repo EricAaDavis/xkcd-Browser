@@ -23,7 +23,7 @@ class ComicCollectionViewCell: UICollectionViewCell {
         comicImageView.image = nil
     }
     
-    func setupCell(comicTitle: String, comicNumber: String, imageURL: URL) {
+    func setupCell(comicTitle: String, comicNumber: Int, imageURL: URL) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = "#\(comicNumber)"
         ComicImageRequest(imageURL: imageURL).send { response in
@@ -38,7 +38,7 @@ class ComicCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setUpCell(comicTitle: String, comicNumber: String, imageData: Data?) {
+    func setupCell(comicTitle: String, comicNumber: Int, imageData: Data?) {
         comicTitleLabel.text = comicTitle
         comicNumberLabel.text = "#\(comicNumber)"
         
