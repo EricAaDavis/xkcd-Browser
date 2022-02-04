@@ -26,7 +26,6 @@ class ComicDetailedViewController: UIViewController {
     }
     
     let savedComicsManager = SavedComicsManager.shared
-    
     var currentComicIsSaved: Bool {
         guard let currentComicNumber = currentComicNumber else {
             return false
@@ -50,7 +49,7 @@ class ComicDetailedViewController: UIViewController {
     
     func updateUI() {
         checkIfNext()
-        checkIfSaved()
+        toggleSaveButtonImage()
         comicImageView.image = nil
         guard let comic = currentComic else { return }
         comicTitleLabel.text = comic.title
@@ -83,11 +82,21 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
-    func checkIfSaved() {
+
+    func toggleSaveButtonImage() {
         if currentComicIsSaved {
             saveComicButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         } else {
             saveComicButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+            
+    }
+    
+    func toggleSave() {
+        if currentComicIsSaved {
+            savedComicsManager.removeSavedComicByComicNumber(comicNumberToRemove: currentComicNumber!)
+        } else {
+            savedComicsManager.save(currentComic!, currentComicImage: currentComicImage)
         }
     }
     
@@ -121,11 +130,8 @@ class ComicDetailedViewController: UIViewController {
     }
     
     @IBAction func saveComicButtonTapped(_ sender: Any) {
-        
-        savedComicsManager.save(currentComic!, currentComicImage: currentComicImage)
-        print(savedComicsManager.getSavedComics())
-        print(currentComicIsSaved)
-        
+        toggleSave()
+        toggleSaveButtonImage()        
     }
     
     

@@ -56,7 +56,6 @@ final class SavedComicsManager {
         storedComics.removeAll { storedComic in
             storedComic.comicNumber == comicNumberToRemove
         }
-        
         store.storedComics = storedComics
     }
     
