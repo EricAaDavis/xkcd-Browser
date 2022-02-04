@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RDi-Qn-0rh">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -151,7 +151,97 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013.0434782608696" y="646.875"/>
+            <point key="canvasLocation" x="138" y="647"/>
+        </scene>
+        <!--Saved Comics-->
+        <scene sceneID="k7M-cS-ZUW">
+            <objects>
+                <collectionViewController id="Aep-qR-Fg0" customClass="SavedComicsCollectionViewController" customModule="xkcd_Browser" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="U6j-0N-KuY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ISb-z2-lP6">
+                            <size key="itemSize" width="414" height="186"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ComicCell" id="uXk-sv-kQy" customClass="ComicCollectionViewCell" customModule="xkcd_Browser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pV7-dI-xVC">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWX-KP-w6N">
+                                            <rect key="frame" x="8" y="8" width="406" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="3u0-bz-QqG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text.quote" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="H9X-O7-jzv">
+                                            <rect key="frame" x="8" y="38.5" width="398" height="234.5"/>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oT1-mM-Q3D" userLabel="Comic Number View">
+                                            <rect key="frame" x="343.5" y="231" width="66.5" height="40"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9t-MG-9gZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="66.5" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="e9t-MG-9gZ" secondAttribute="trailing" id="8ff-wI-7t0"/>
+                                                <constraint firstItem="e9t-MG-9gZ" firstAttribute="top" secondItem="oT1-mM-Q3D" secondAttribute="top" id="Ifk-IN-izw"/>
+                                                <constraint firstAttribute="height" constant="40" id="Z5C-TW-iuV"/>
+                                                <constraint firstAttribute="width" secondItem="oT1-mM-Q3D" secondAttribute="height" multiplier="5:3" id="j0r-lX-bU1"/>
+                                                <constraint firstItem="e9t-MG-9gZ" firstAttribute="leading" secondItem="oT1-mM-Q3D" secondAttribute="leading" id="mF6-JJ-0ab"/>
+                                                <constraint firstAttribute="bottom" secondItem="e9t-MG-9gZ" secondAttribute="bottom" id="qS6-1B-tPJ"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QWX-KP-w6N" firstAttribute="leading" secondItem="pV7-dI-xVC" secondAttribute="leading" constant="8" id="AWK-Fb-vfB"/>
+                                        <constraint firstAttribute="trailing" secondItem="oT1-mM-Q3D" secondAttribute="trailing" constant="4" id="LFY-x5-ddm"/>
+                                        <constraint firstItem="H9X-O7-jzv" firstAttribute="top" secondItem="QWX-KP-w6N" secondAttribute="bottom" constant="8" id="PsS-5k-XJt"/>
+                                        <constraint firstAttribute="trailing" secondItem="QWX-KP-w6N" secondAttribute="trailing" id="YF2-Ca-VsJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="H9X-O7-jzv" secondAttribute="bottom" id="cBK-zt-F61"/>
+                                        <constraint firstAttribute="bottom" secondItem="oT1-mM-Q3D" secondAttribute="bottom" constant="4" id="ehZ-94-u2g"/>
+                                        <constraint firstItem="QWX-KP-w6N" firstAttribute="top" secondItem="pV7-dI-xVC" secondAttribute="top" constant="8" id="stn-Ng-dho"/>
+                                        <constraint firstItem="H9X-O7-jzv" firstAttribute="leading" secondItem="pV7-dI-xVC" secondAttribute="leading" constant="8" id="sxo-3G-Mfc"/>
+                                        <constraint firstAttribute="trailing" secondItem="H9X-O7-jzv" secondAttribute="trailing" constant="8" id="xkN-XJ-TtL"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="414" height="275"/>
+                                <connections>
+                                    <outlet property="comicImageView" destination="H9X-O7-jzv" id="4QD-UW-sbD"/>
+                                    <outlet property="comicNumberLabel" destination="e9t-MG-9gZ" id="3Yv-aG-Q0s"/>
+                                    <outlet property="comicNumberLabelContainer" destination="oT1-mM-Q3D" id="S0u-pR-Tsv"/>
+                                    <outlet property="comicTitleLabel" destination="QWX-KP-w6N" id="yfB-oz-K6y"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Aep-qR-Fg0" id="uJT-YD-oPK"/>
+                            <outlet property="delegate" destination="Aep-qR-Fg0" id="EZx-s6-30g"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Saved Comics" id="xGC-hU-8ds"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" id="7fd-Lo-jgO"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jes-OK-xCs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.92753623188412" y="646.875"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="e7P-OG-cWK">
@@ -167,6 +257,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="kyE-fm-K7Y" kind="relationship" relationship="viewControllers" id="U1A-Pi-AbJ"/>
+                        <segue destination="ISr-P0-Drs" kind="relationship" relationship="viewControllers" id="n62-Ur-iTa"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCw-jI-YbF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -177,7 +268,9 @@
         <scene sceneID="mMA-so-8eK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kyE-fm-K7Y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Browse" image="globe" catalog="system" id="san-Dn-GQz"/>
+                    <tabBarItem key="tabBarItem" title="Browse" id="san-Dn-GQz">
+                        <imageReference key="image" image="globe" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="xJ7-t7-SLy">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -191,7 +284,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OVX-5j-s6f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-775" y="647"/>
+            <point key="canvasLocation" x="-1365" y="647"/>
         </scene>
         <!--Comic Browser-->
         <scene sceneID="oNI-SE-VDj">
@@ -286,17 +379,41 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uv7-B1-ge3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-28.985507246376812" y="646.875"/>
+            <point key="canvasLocation" x="-659" y="647"/>
+        </scene>
+        <!--Saved-->
+        <scene sceneID="O3b-sY-bFR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ISr-P0-Drs" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Saved" image="bookmark.fill" catalog="system" id="GEw-am-riY"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="isK-Jz-Bak">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance" backgroundEffect="systemUltraThinMaterial"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Aep-qR-Fg0" kind="relationship" relationship="rootViewController" id="RZZ-P6-snf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Hj-5i-562" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1719" y="647"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7fd-Lo-jgO"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="ComicImagePlaceholder" width="382" height="311"/>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="text.quote" catalog="system" width="128" height="100"/>
         <namedColor name="xkcd color">
-            <color red="0.59999999999999998" green="0.6588235294117647" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.60000002384185791" green="0.6589999794960022" blue="0.7839999794960022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

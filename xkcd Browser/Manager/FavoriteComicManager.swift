@@ -7,19 +7,26 @@
 
 import Foundation
 
-protocol FavoriteComicManagerDelegate: AnyObject {
-    func favoriteComicsUpdated()
+protocol SavedComicsManager: AnyObject {
+    func savedComicsUpdated()
 }
 
 final class FavoriteComicManager {
     
-    weak var favoriteComicDelegate: FavoriteComicManagerDelegate?
-    
+    weak var favoriteComicDelegate: SavedComicsManager?
     
     static let shared = FavoriteComicManager()
     
     private let store: ComicStore = ComicStore.shared
     
+    
+    func save(_ comic: StoredComic) {
+        
+    }
+    
+    func getSavedComics() -> [StoredComic] {
+        
+    }
     
     
     

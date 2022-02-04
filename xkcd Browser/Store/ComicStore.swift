@@ -31,8 +31,6 @@ final class ComicStore {
     }
     
     //MARK: - Store Helper
-    
-    
     private func store<T: Encodable>(_ object: T?, for key: Key) {
         let key = wrap(key)
         guard let object = object else {
@@ -53,6 +51,7 @@ final class ComicStore {
               }
         return object
     }
+    
     
     private func wrap(_ key: Key) -> String {
         let rawKey = key.rawValue
