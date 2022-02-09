@@ -32,33 +32,22 @@ final class ComicStore {
     
     //MARK: - Store Helper
     private func store<T: Encodable>(_ object: T?, for key: Key) {
-        let key = wrap(key)
         guard let object = object else {
-            store.removeObject(forKey: key)
+            store.removeObject(forKey: key.rawValue)
             return
         }
         guard let encodedObject = try? encoder.encode(object) else {
             print("Can't encode object with type: '\(object.self)'")
             return
         }
-        store.set(encodedObject, forKey: key)
+        store.set(encodedObject, forKey: key.rawValue)
     }
     
     private func retrieve<T: Decodable>(for key: Key) -> T? {
-        guard let savedObject = store.data(forKey: wrap(key)),
+        guard let savedObject = store.data(forKey: key.rawValue),
               let object = try? decoder.decode(T.self, from: savedObject) else {
                   return nil
               }
         return object
-    }
-    
-    
-    private func wrap(_ key: Key) -> String {
-        let rawKey = key.rawValue
-#if DEBUG
-        return rawKey + "_debug"
-#else
-        return rawKey
-#endif
     }
 }

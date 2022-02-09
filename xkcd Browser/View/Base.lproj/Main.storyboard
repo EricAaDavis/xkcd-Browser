@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RDi-Qn-0rh">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -42,7 +42,6 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ggb-Zm-UWg">
                                                         <rect key="frame" x="0.0" y="0.0" width="104.5" height="41"/>
-                                                        <color key="tintColor" red="0.53406163360000003" green="0.83106998430000001" blue="1" alpha="0.61262875510000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" image="arrow.left" catalog="system" cornerStyle="capsule"/>
                                                         <connections>
@@ -57,7 +56,6 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLt-qn-HOh">
                                                         <rect key="frame" x="249.5" y="0.0" width="104.5" height="41"/>
-                                                        <color key="tintColor" red="0.53406163360000003" green="0.83106998430000001" blue="1" alpha="0.61262875510000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" cornerStyle="capsule">
                                                             <imageReference key="image" image="arrow.forward" catalog="system" symbolScale="large"/>
@@ -268,7 +266,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jes-OK-xCs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.92753623188412" y="646.875"/>
+            <point key="canvasLocation" x="909" y="647"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="e7P-OG-cWK">
@@ -430,7 +428,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wag-ga-cQb"/>
+        <segue reference="7fd-Lo-jgO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>

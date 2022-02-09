@@ -65,6 +65,7 @@ class ComicDetailedViewController: UIViewController {
     func updateForFetchedComic(_ comic: Comic) {
         checkIfNext()
         activityIndicator.startAnimating()
+        
         comicImageView.image = nil
         comicTitleLabel.text = comic.title
         comicNumberlabel.text = "#\(comic.number)"
@@ -86,6 +87,7 @@ class ComicDetailedViewController: UIViewController {
     func updateForStoredComic(_ comic: StoredComic) {
         nextComicButton.isHidden = true
         previousComicButton.isHidden = true
+        
         comicTitleLabel.text = comic.title
         altTextlabel.text = comic.alt
         transcriptTextlabel.text = comic.transcript
@@ -165,4 +167,3 @@ class ComicDetailedViewController: UIViewController {
         toggleSaveButtonImage()        
     }
 }
-

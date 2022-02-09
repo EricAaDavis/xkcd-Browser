@@ -36,6 +36,7 @@ final class ComicBrowserViewModel {
     private var lastComicNumber: Int {
         newestComicNumber - numberOfItemsToFetch
     }
+    
     //Get the next comics in queue.
     func getNextComics() {
         newestComicNumber -= (numberOfItemsToFetch + 1)
@@ -83,7 +84,7 @@ final class ComicBrowserViewModel {
     }
     
     //Gets a specific comic by its comic number
-    func getSpecificComicByNumber(numberString: String) {
+    func getComicByNumber(numberString: String) {
         ComicByNumberRequest(comicNumber: numberString).send { result in
             switch result {
             case .success(let comic):

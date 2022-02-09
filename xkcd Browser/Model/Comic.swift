@@ -53,6 +53,6 @@ struct Comic {
 
 extension Comic: Codable {  }
 
-//Hashable needs to be implemented for diffing in the collection view
+//Hashable needs to be adopted for diffing in the collection view
 extension Comic: Hashable {  }
 

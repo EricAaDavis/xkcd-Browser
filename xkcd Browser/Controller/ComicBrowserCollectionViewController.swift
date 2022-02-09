@@ -63,7 +63,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     @objc func fetchComicByNumber() {
         guard let searchControllerText = searchController.searchBar.text else { return }
         if searchControllerText != "" {
-            viewModel.getSpecificComicByNumber(numberString: searchControllerText)
+            viewModel.getComicByNumber(numberString: searchControllerText)
         } else {
             viewModel.featuredComic = nil
         }

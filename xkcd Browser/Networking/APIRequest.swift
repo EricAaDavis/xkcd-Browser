@@ -20,11 +20,11 @@ protocol APIRequest {
 //This value usually doesn't changes, so we set a default value
 extension APIRequest {
     var host: String { "xkcd.com" }
+    var path: String { "/info.0.json" }
 }
 
-//These will usually be nil, so we set a default value
+//These will usually be nil, so we set them to nil by default
 extension APIRequest {
-    var path: String { "/info.0.json" }
     var queryItems: [URLQueryItem]? { nil }
     var imageURL: URL? { nil }
 }
@@ -88,19 +88,5 @@ extension APIRequest where Response == UIImage {
                 completion(.failure(ImageRequestError.coundNotInitializeFromData))
             }
         }.resume()
-    }
-}
-
-extension APIRequest where Response == Data {
-    func send(completion: @escaping (Result<Self.Response, Error>) -> Void) {
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            if let data = data {
-                completion(.success(data))
-            } else if let error = error {
-                completion(.failure(error))
-            } else {
-                print("Could not get image data")
-            }
-        }
     }
 }

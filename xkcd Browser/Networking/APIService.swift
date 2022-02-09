@@ -29,9 +29,5 @@ struct ComicImageRequest: APIRequest {
     var imageURL: URL?    
 }
 
-struct ComicImageDataRequest: APIRequest {
-    typealias Response = Data
-    
-    var imageURL: URL?
-}
+
 
