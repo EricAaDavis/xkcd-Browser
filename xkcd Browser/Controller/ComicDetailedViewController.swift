@@ -12,7 +12,7 @@ class ComicDetailedViewController: UIViewController {
 
     @IBOutlet weak var comicTitleLabel: UILabel!
     @IBOutlet weak var comicImageView: UIImageView!
-    @IBOutlet weak var comicNumberlabel: UILabel!
+    @IBOutlet weak var comicNumberLabel: UILabel!
     @IBOutlet weak var altTextlabel: UILabel!
     @IBOutlet weak var transcriptTextlabel: UILabel!
     @IBOutlet weak var nextComicButton: UIButton!
@@ -59,6 +59,7 @@ class ComicDetailedViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         toggleSaveButtonImage()
     }
     
@@ -68,7 +69,7 @@ class ComicDetailedViewController: UIViewController {
         
         comicImageView.image = nil
         comicTitleLabel.text = comic.title
-        comicNumberlabel.text = "#\(comic.number)"
+        comicNumberLabel.text = "#\(comic.number)"
         altTextlabel.text = comic.alt == "" ? "No alt text" : comic.alt
         transcriptTextlabel.text = comic.transcript == "" ? "No Transcript" : comic.transcript
         ComicImageRequest(imageURL: comic.img).send() { result in
@@ -91,7 +92,7 @@ class ComicDetailedViewController: UIViewController {
         comicTitleLabel.text = comic.title
         altTextlabel.text = comic.alt
         transcriptTextlabel.text = comic.transcript
-        comicNumberlabel.text = "#\(comic.comicNumber)"
+        comicNumberLabel.text = "#\(comic.comicNumber)"
         comicImageView.image = comic.image?.imageFromBase64
     }
     
@@ -104,7 +105,7 @@ class ComicDetailedViewController: UIViewController {
         }
     }
     
-    //Checks wether there is a next comic, or the first comic is displayed. If ither are true, disable the respectable button.
+    //Checks wether there is a next comic, or the first comic is displayed. If either are true, disable the respectable button.
     func checkIfNext() {
         nextComicButton.isEnabled = true
         previousComicButton.isEnabled = true

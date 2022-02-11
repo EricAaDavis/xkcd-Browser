@@ -60,16 +60,16 @@ final class ComicBrowserViewModel {
         }
     }
     
-    //Gets comics for comic number within a range of commic numbers
-    func getPreviousComicsForNumber(from oldetsComic: Int, to newestComic: Int) {
+    //Gets comics for comic number within a range of comic numbers
+    func getPreviousComicsForNumber(from oldestComic: Int, to newestComic: Int) {
         let group = DispatchGroup()
-        for comicNumber in oldetsComic...newestComic {
+        for comicNumber in oldestComic...newestComic {
             let comicNumberString = String(comicNumber)
             group.enter()
             ComicByNumberRequest(comicNumber: comicNumberString).send { result in
                 switch result {
                 case .success(let comic):
-                    self.model.comics?.append(comic)
+                    self.model.comics.append(comic)
                 case .failure(let error):
                     print(error)
                 }
@@ -102,5 +102,5 @@ final class ComicBrowserViewModel {
 //Creates a nice seperation of the model from the view model
 struct Model {
     var latestComic: Comic?
-    var comics: [Comic]? = []
+    var comics: [Comic] = []
 }

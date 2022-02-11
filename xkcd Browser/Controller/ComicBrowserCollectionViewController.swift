@@ -29,7 +29,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         
-        //Seturp Search Controller
+        //Setup Search Controller
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -71,8 +71,8 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     //MARK: - Collection View set up
     func updateCollectionView() {
-        guard let latestComic = viewModel.model.latestComic,
-              let comics = viewModel.model.comics else { return }
+        guard let latestComic = viewModel.model.latestComic else { return }
+        let comics = viewModel.model.comics
         
         snapshot.deleteAllItems()
         snapshot.appendSections([.featuredComic, .comics])
@@ -228,7 +228,7 @@ class ComicBrowserCollectionViewController: UICollectionViewController, UISearch
     
     //This function is used to fetch the next set of comics when the user scrolls to the last 4th cell
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.item == (viewModel.model.comics!.count - 4) {
+        if indexPath.item == (viewModel.model.comics.count - 4) {
             viewModel.getNextComics()
         }
     }

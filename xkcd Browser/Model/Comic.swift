@@ -33,22 +33,6 @@ struct Comic {
         case transcript
         case img
     }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.number = try container.decode(Int.self, forKey: .number)
-        self.year = try container.decode(String.self, forKey: .year)
-        self.month = try container.decode(String.self, forKey: .month)
-        self.day = try container.decode(String.self, forKey: .day)
-        self.link = try container.decode(String.self, forKey: .link)
-        self.news = try container.decode(String.self, forKey: .news)
-        self.safeTitle = try container.decode(String.self, forKey: .safeTitle)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.alt = try container.decode(String.self, forKey: .alt)
-        self.transcript = try container.decode(String.self, forKey: .transcript)
-        self.img = try container.decode(URL.self, forKey: .img)
-    }
 }
 
 extension Comic: Codable {  }
